@@ -1,8 +1,6 @@
 ﻿using KliczekPomocniczek.Skills;
 using System.Windows;
-using System.Windows.Controls;
 using Tekla.Structures.Model;
-using System.Windows.Input;
 
 namespace KliczekPomocniczek
 {
@@ -22,8 +20,8 @@ namespace KliczekPomocniczek
             listener = new keyboardKeyListener();
             listener.OnKeyPressed += Listener_OnKeyPressed;
             listener.HookKeyboard();
-
         }
+
         public void Listener_OnKeyPressed(object sender, KeyPressedArgs e)
         {
             Model model = new Model();
@@ -31,6 +29,16 @@ namespace KliczekPomocniczek
                 checkBox_WeldPosition.IsChecked == true && 
                 model.GetConnectionStatus())
                 changeWeldDirection.weldPositionEnum();
+        }
+
+        private void deleteClipPlanes_Click(object sender, RoutedEventArgs e)
+        {
+            clipPlanes.deleteClipPlanes();
+        }
+
+        private void createClipPlanes_Click(object sender, RoutedEventArgs e)
+        {
+            clipPlanes.createClipPlanes();
         }
     }
 }
