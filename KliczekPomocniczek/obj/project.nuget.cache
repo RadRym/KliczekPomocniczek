@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "SrmtZ7a9FKjebRTJVBgCIxssTIw/nl1zASN0kCw9zkkU0QH1fxnwoSLzkEuIThA5siVsQOJWldi831MnDp2iYA==",
+  "success": true,
+  "projectFilePath": "E:\\Projects\\KliczekPomocniczek\\KliczekPomocniczek\\KliczekPomocniczek.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\adria\\.nuget\\packages\\teklaopenapi\\2021.0.1\\teklaopenapi.2021.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
