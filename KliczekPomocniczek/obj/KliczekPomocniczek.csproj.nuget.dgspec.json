@@ -38,9 +38,13 @@
       "frameworks": {
         "net48": {
           "dependencies": {
-            "TeklaOpenAPI": {
+            "Tekla.Structures": {
               "target": "Package",
-              "version": "[2021.0.1, )"
+              "version": "[2021.0.0, )"
+            },
+            "Tekla.Structures.Model": {
+              "target": "Package",
+              "version": "[2021.0.0, )"
             }
           }
         }

@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KliczekPomocniczek"
         mc:Ignorable="d"
-        Title="Kliczek Pomocniczek" Height="150" Width="250" Loaded="Window_Loaded">
+        Title="Kliczek Pomocniczek" Height="250" Width="250" Loaded="Window_Loaded">
     <Grid>
         <CheckBox x:Name="checkBox_WeldPosition" Content="Enable Easy Weld Position Mode" IsChecked="True" Margin="10,10,10,0"/>        
         <Button x:Name="deleteClipPlanes" Content="Delete Clip Planes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,10,30" Height="20" Width="200" Click="deleteClipPlanes_Click"/>
         <Button x:Name="createClipPlanes" Content="Create Clip Planes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,60,10,0" Height="20" Click="createClipPlanes_Click"/>
+        <Button x:Name="objectCoordynates" Content="Object Coordynates" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,85,10,0" Height="20" Click="objectCoordynates_Click"/>
+        <Button x:Name="setPartWorkPlane" Content="Set Part Work Plane" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,110,10,0" Height="20" Click="setPartWorkPlane_Click"/>
+        <Button x:Name="Ribs" Content="Ribs" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,135,10,0" Height="20" Click="Ribs_Click" IsEnabled="False"/>
+
     </Grid>
 </Window>

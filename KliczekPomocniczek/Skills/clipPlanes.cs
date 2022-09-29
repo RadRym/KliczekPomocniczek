@@ -1,20 +1,12 @@
-﻿using System.Windows;
-using TSM = Tekla.Structures.Model;
+﻿using TSM = Tekla.Structures.Model;
 using TSMUI = Tekla.Structures.Model.UI;
-using TSMW = Tekla.Structures.Model.Weld.WeldPositionEnum;
-using System.IO;
-using System.Diagnostics;
 using Tekla.Structures.Model;
 using Tekla.Structures.Model.UI;
 using System.Collections;
-using Tekla.Structures.Model.Operations;
-using Tekla.Structures.Geometry3d;
 using Point = Tekla.Structures.Geometry3d.Point;
 using Vector = Tekla.Structures.Geometry3d.Vector;
-using System.Windows.Documents;
 using System.Collections.Generic;
 using System.Linq;
-using Tekla.Structures.ModelInternal;
 using Operation = Tekla.Structures.Model.Operations.Operation;
 using Part = Tekla.Structures.Model.Part;
 

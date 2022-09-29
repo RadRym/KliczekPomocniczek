@@ -4,7 +4,7 @@ using Tekla.Structures.Model;
 
 namespace KliczekPomocniczek
 {
-    
+
     public partial class MainWindow : Window
     {
         public keyboardKeyListener listener;
@@ -26,7 +26,7 @@ namespace KliczekPomocniczek
         {
             Model model = new Model();
             if (e.KeyPressed == keyChangeWeldPosition &&
-                checkBox_WeldPosition.IsChecked == true && 
+                checkBox_WeldPosition.IsChecked == true &&
                 model.GetConnectionStatus())
                 changeWeldDirection.weldPositionEnum();
         }
@@ -39,6 +39,21 @@ namespace KliczekPomocniczek
         private void createClipPlanes_Click(object sender, RoutedEventArgs e)
         {
             clipPlanes.createClipPlanes();
+        }
+
+        private void Ribs_Click(object sender, RoutedEventArgs e)
+        {
+            ribsCuts.prompt();
+        }
+
+        private void objectCoordynates_Click(object sender, RoutedEventArgs e)
+        {
+            partCoordSyst.Draw();
+        }
+
+        private void setPartWorkPlane_Click(object sender, RoutedEventArgs e)
+        {
+            partCoordSyst.Set();
         }
     }
 }

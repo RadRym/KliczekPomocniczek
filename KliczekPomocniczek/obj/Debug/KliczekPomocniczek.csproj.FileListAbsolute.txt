@@ -4,3 +4,17 @@ E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\MainWindow.g.cs
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\App.g.cs
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek_MarkupCompile.cache
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek_MarkupCompile.lref
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\bin\Debug\KliczekPomocniczek.exe.config
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\bin\Debug\KliczekPomocniczek.exe
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\bin\Debug\KliczekPomocniczek.pdb
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\bin\Debug\Tekla.Structures.dll
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\bin\Debug\Tekla.Structures.Datatype.dll
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\bin\Debug\Tekla.Structures.Model.dll
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\MainWindow.baml
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.g.resources
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.Properties.Resources.resources
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.csproj.GenerateResource.cache
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.csproj.CoreCompileInputs.cache
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.csproj.CopyComplete
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.exe
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.pdb

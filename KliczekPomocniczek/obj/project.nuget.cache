@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "SrmtZ7a9FKjebRTJVBgCIxssTIw/nl1zASN0kCw9zkkU0QH1fxnwoSLzkEuIThA5siVsQOJWldi831MnDp2iYA==",
+  "dgSpecHash": "qeF1HkgiJEBOJfOfo2UdQfozxESQ3p15Cw/UUlUHfcynyJqFAWmT4CtqkaZhrlzsQCpK0DxdrjdgkpmSI3djmA==",
   "success": true,
   "projectFilePath": "E:\\Projects\\KliczekPomocniczek\\KliczekPomocniczek\\KliczekPomocniczek.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\adria\\.nuget\\packages\\teklaopenapi\\2021.0.1\\teklaopenapi.2021.0.1.nupkg.sha512"
+    "C:\\Users\\adria\\.nuget\\packages\\tekla.structures\\2021.0.0\\tekla.structures.2021.0.0.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\tekla.structures.datatype\\2021.0.0\\tekla.structures.datatype.2021.0.0.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\tekla.structures.model\\2021.0.0\\tekla.structures.model.2021.0.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using TSM = Tekla.Structures.Model;
+﻿using TSM = Tekla.Structures.Model;
 using TSMUI = Tekla.Structures.Model.UI;
 using TSMW = Tekla.Structures.Model.Weld.WeldPositionEnum;
 using Tekla.Structures.Model;
