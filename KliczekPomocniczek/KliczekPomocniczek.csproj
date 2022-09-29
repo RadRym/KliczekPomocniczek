@@ -61,6 +61,7 @@
     <Compile Include="Skills\keyboardKeyListener.cs" />
     <Compile Include="Skills\partCoordSyst.cs" />
     <Compile Include="Skills\ribsCuts.cs" />
+    <Compile Include="Skills\viewClass.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

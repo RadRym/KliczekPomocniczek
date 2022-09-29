@@ -7,12 +7,28 @@
         mc:Ignorable="d"
         Title="Kliczek Pomocniczek" Height="250" Width="250" Loaded="Window_Loaded">
     <Grid>
-        <CheckBox x:Name="checkBox_WeldPosition" Content="Enable Easy Weld Position Mode" IsChecked="True" Margin="10,10,10,0"/>        
+        <CheckBox x:Name="checkBox_WeldPosition" Content="Enable Easy Weld Position Mode" IsChecked="True" Margin="10,10,10,0"/>
         <Button x:Name="deleteClipPlanes" Content="Delete Clip Planes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,10,30" Height="20" Width="200" Click="deleteClipPlanes_Click"/>
         <Button x:Name="createClipPlanes" Content="Create Clip Planes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,60,10,0" Height="20" Click="createClipPlanes_Click"/>
         <Button x:Name="objectCoordynates" Content="Object Coordynates" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,85,10,0" Height="20" Click="objectCoordynates_Click"/>
         <Button x:Name="setPartWorkPlane" Content="Set Part Work Plane" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,110,10,0" Height="20" Click="setPartWorkPlane_Click"/>
-        <Button x:Name="Ribs" Content="Ribs" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,135,10,0" Height="20" Click="Ribs_Click" IsEnabled="False"/>
+        <Button x:Name="temporaryColor" Content="Set Temporary Color" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="10,135,0,0" Height="20" Click="temporaryColor_Click"/>
+        <ComboBox Name="comboColors" Margin="170,135,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="20">
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid Loaded="table_Loaded" />
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="10,135,10,0" />
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button x:Name="Ribs" Content="Ribs" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,160,10,0" Height="20" Click="Ribs_Click" IsEnabled="False"/>
 
     </Grid>
 </Window>
