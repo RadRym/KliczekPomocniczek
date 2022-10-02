@@ -46,12 +46,12 @@ namespace KliczekPomocniczek.Skills
             model.GetWorkPlaneHandler().SetCurrentTransformationPlane(PartPlane);
             model.CommitChanges();
             ViewHandler.RedrawWorkplane();
-            ModelViewEnumerator ViewEnum = ViewHandler.GetAllViews();
-            while (ViewEnum.MoveNext())
-            {
-                View ViewSel = ViewEnum.Current;
-                ViewHandler.RedrawView(ViewSel);
-            }
+            //ModelViewEnumerator ViewEnum = ViewHandler.GetAllViews();
+            //while (ViewEnum.MoveNext())
+            //{
+            //    View ViewSel = ViewEnum.Current;
+            //    ViewHandler.RedrawView(ViewSel);
+            //}
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using KliczekPomocniczek.Skills;
-using System;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Media;
 using Tekla.Structures.Model;
-using static Tekla.Structures.Model.LoadGroup;
-using Grid = System.Windows.Controls.Grid;
+using Tekla.Structures.Model.Operations;
+using TSMUI = Tekla.Structures.Model.UI;
 
 namespace KliczekPomocniczek
 {
@@ -16,7 +15,10 @@ namespace KliczekPomocniczek
         public MainWindow()
         {
             InitializeComponent();
-            comboColors.ItemsSource = typeof(Colors).GetProperties();
+            setComboColors.ItemsSource = typeof(Colors).GetProperties();
+            setComboColors.Text = "-----Select-----";
+            selectComboColors.ItemsSource = typeof(Colors).GetProperties();
+            selectComboColors.Text = "-----Select-----";
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -33,31 +35,6 @@ namespace KliczekPomocniczek
                 checkBox_WeldPosition.IsChecked == true &&
                 model.GetConnectionStatus())
                 changeWeldDirection.weldPositionEnum();
-        }
-
-        private static readonly int COLUMS = 5;
-
-        private void table_Loaded(object sender, RoutedEventArgs e)
-        {
-            Grid grid = sender as Grid;
-            if (grid != null)
-            {
-                if (grid.RowDefinitions.Count == 0)
-                {
-                    for (int r = 0; r <= comboColors.Items.Count / COLUMS; r++)
-                        grid.RowDefinitions.Add(new RowDefinition());
-                }
-                if (grid.ColumnDefinitions.Count == 0)
-                {
-                    for (int c = 0; c < Math.Min(comboColors.Items.Count, COLUMS); c++)
-                        grid.ColumnDefinitions.Add(new ColumnDefinition());
-                }
-                for (int i = 0; i < grid.Children.Count; i++)
-                {
-                    Grid.SetColumn(grid.Children[i], i % COLUMS);
-                    Grid.SetRow(grid.Children[i], i / COLUMS);
-                }
-            }
         }
 
         private void deleteClipPlanes_Click(object sender, RoutedEventArgs e)
@@ -85,9 +62,22 @@ namespace KliczekPomocniczek
             partCoordSyst.Set();
         }
 
-        private void temporaryColor_Click(object sender, RoutedEventArgs e)
+        private void setTemporaryColor_Click(object sender, RoutedEventArgs e)
         {
-            viewClass.TemporaryColor();
+            var @object = setComboColors.SelectedItem.ToString();
+            string[] parts = @object.Split(' ');
+            string lastWord = parts[parts.Length - 1];
+            System.Drawing.Color color = System.Drawing.Color.FromName(lastWord);
+            viewClass.setTemporaryColor(color);
+        }
+
+        private void selectTemporaryColor_Click(object sender, RoutedEventArgs e)
+        {
+            var @object = setComboColors.SelectedItem.ToString();
+            string[] parts = @object.Split(' ');
+            string lastWord = parts[parts.Length - 1];
+            System.Drawing.Color color = System.Drawing.Color.FromName(lastWord);
+            viewClass.selectTemporaryColor(color);
         }
     }
 }

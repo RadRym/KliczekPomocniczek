@@ -5,30 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KliczekPomocniczek"
         mc:Ignorable="d"
-        Title="Kliczek Pomocniczek" Height="250" Width="250" Loaded="Window_Loaded">
+        Title="Kliczek Pomocniczek" Height="250" Width="230" Loaded="Window_Loaded">
     <Grid>
-        <CheckBox x:Name="checkBox_WeldPosition" Content="Enable Easy Weld Position Mode" IsChecked="True" Margin="10,10,10,0"/>
-        <Button x:Name="deleteClipPlanes" Content="Delete Clip Planes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,10,30" Height="20" Width="200" Click="deleteClipPlanes_Click"/>
-        <Button x:Name="createClipPlanes" Content="Create Clip Planes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,60,10,0" Height="20" Click="createClipPlanes_Click"/>
-        <Button x:Name="objectCoordynates" Content="Object Coordynates" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,85,10,0" Height="20" Click="objectCoordynates_Click"/>
-        <Button x:Name="setPartWorkPlane" Content="Set Part Work Plane" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,110,10,0" Height="20" Click="setPartWorkPlane_Click"/>
-        <Button x:Name="temporaryColor" Content="Set Temporary Color" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="10,135,0,0" Height="20" Click="temporaryColor_Click"/>
-        <ComboBox Name="comboColors" Margin="170,135,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="20">
-            <ComboBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid Loaded="table_Loaded" />
-                </ItemsPanelTemplate>
-            </ComboBox.ItemsPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+
+        <CheckBox x:Name="checkBox_WeldPosition" Content="Enable Easy Weld Position Mode" IsChecked="True"
+                Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Button x:Name="deleteClipPlanes" Content="Delete Clip Planes"
+                Grid.Column="1" Grid.Row="2" Click="deleteClipPlanes_Click"/>
+        <Button x:Name="createClipPlanes" Content="Create Clip Planes"
+                Grid.Column="1" Grid.Row="3" Click="createClipPlanes_Click"/>
+        <Button x:Name="objectCoordynates" Content="Object Coordynates"
+                Grid.Column="1" Grid.Row="4" Click="objectCoordynates_Click"/>
+        <Button x:Name="setPartWorkPlane" Content="Set Part Work Plane"
+                Grid.Column="1" Grid.Row="5" Click="setPartWorkPlane_Click"/>
+        <Button x:Name="setTemporaryColor" Content="Set Temporary Color"
+                Grid.Column="1" Grid.Row="6" Click="setTemporaryColor_Click"/>
+        <Button x:Name="selectTemporaryColor" Content="Select Temporary Color"
+                Grid.Column="1" Grid.Row="7" Click="selectTemporaryColor_Click"/>
+        <Button x:Name="Ribs" Content="Ribs" IsEnabled="False"
+                Grid.Column="1" Grid.Row="8" Click="Ribs_Click"/>
+        <Button x:Name="test" Content="test"
+                Grid.Column="1" Grid.Row="9"/>
+
+        <ComboBox Name="setComboColors"
+                  Grid.Column="2" Grid.Row="6">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="10,135,10,0" />
-                        <TextBlock Text="{Binding Name}" />
+                        <Rectangle Fill="{Binding Name}"  Width="16" Height="16" />
+                        <TextBlock Text ="{Binding Name}" />
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button x:Name="Ribs" Content="Ribs" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,160,10,0" Height="20" Click="Ribs_Click" IsEnabled="False"/>
 
+        <ComboBox Name="selectComboColors"
+                  Grid.Column="2" Grid.Row="7">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{Binding Name}"  Width="16" Height="16" />
+                        <TextBlock Text ="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </Grid>
 </Window>
