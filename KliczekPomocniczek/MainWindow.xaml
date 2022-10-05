@@ -33,21 +33,21 @@
         <CheckBox x:Name="checkBox_WeldPosition" Content="Enable Easy Weld Position Mode" IsChecked="True"
                 Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
         <Button x:Name="deleteClipPlanes" Content="Delete Clip Planes"
-                Grid.Column="1" Grid.Row="2" Click="deleteClipPlanes_Click"/>
+                Grid.Column="1" Grid.Row="2" Click="DeleteClipPlanes_Click"/>
         <Button x:Name="createClipPlanes" Content="Create Clip Planes"
-                Grid.Column="1" Grid.Row="3" Click="createClipPlanes_Click"/>
+                Grid.Column="1" Grid.Row="3" Click="CreateClipPlanes_Click"/>
         <Button x:Name="objectCoordynates" Content="Object Coordynates"
-                Grid.Column="1" Grid.Row="4" Click="objectCoordynates_Click"/>
+                Grid.Column="1" Grid.Row="4" Click="ObjectCoordynates_Click"/>
         <Button x:Name="setPartWorkPlane" Content="Set Part Work Plane"
-                Grid.Column="1" Grid.Row="5" Click="setPartWorkPlane_Click"/>
+                Grid.Column="1" Grid.Row="5" Click="SetPartWorkPlane_Click"/>
         <Button x:Name="setTemporaryColor" Content="Set Temporary Color"
-                Grid.Column="1" Grid.Row="6" Click="setTemporaryColor_Click"/>
+                Grid.Column="1" Grid.Row="6" Click="SetTemporaryColor_Click"/>
         <Button x:Name="selectTemporaryColor" Content="Select Temporary Color"
-                Grid.Column="1" Grid.Row="7" Click="selectTemporaryColor_Click"/>
+                Grid.Column="1" Grid.Row="7" Click="SelectTemporaryColor_Click"/>
         <Button x:Name="Ribs" Content="Ribs" IsEnabled="False"
                 Grid.Column="1" Grid.Row="8" Click="Ribs_Click"/>
         <Button x:Name="test" Content="test"
-                Grid.Column="1" Grid.Row="9"/>
+                Grid.Column="1" Grid.Row="9" Click="Test_Click"/>
 
         <ComboBox Name="setComboColors"
                   Grid.Column="2" Grid.Row="6">

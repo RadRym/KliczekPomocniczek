@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace KliczekPomocniczek.Windows
+namespace KliczekPomocniczek.QuickMenu
 {
     /// <summary>
-    /// Interaction logic for PieMenu.xaml
+    /// Interaction logic for QuickMenuPage.xaml
     /// </summary>
-    public partial class PieMenu : Window
+    public partial class QuickMenuPage : Window
     {
-        public PieMenu()
+        public QuickMenuPage()
         {
             InitializeComponent();
         }

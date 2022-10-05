@@ -4,6 +4,70 @@
              xmlns:local="clr-namespace:KliczekPomocniczek"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style  x:Key="QuickMenuButton"
+            TargetType="Button">
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform />
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background" Value="DodgerBlue" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="Background" Value="Coral" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="BorderBrush" Value="#fff"/>
+            
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25" Background="{TemplateBinding Background}" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                 Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="1"
+                                                      Color="#FFFFFF"
+                                                      Opacity="1"
+                                                      BlurRadius="40" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard TargetProperty="RenderTransform.Y">
+                                        <DoubleAnimation From="0"
+                                                     To="-5"
+                                                     Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard TargetProperty="RenderTransform.Y">
+                                        <DoubleAnimation From="-5"
+                                                     To="0"
+                                                     Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

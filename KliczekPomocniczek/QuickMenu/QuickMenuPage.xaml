@@ -1,0 +1,34 @@
+﻿<Window x:Class="KliczekPomocniczek.QuickMenu.QuickMenuPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KliczekPomocniczek.QuickMenu"
+        mc:Ignorable="d"
+        AllowsTransparency="True" 
+        WindowStyle="None" 
+        Background="Transparent"
+        Height="500" 
+        Width="500">
+    <Grid>
+        
+        <!--Background-->
+        <Border
+            x:Name="Board"
+            Height="500"
+            Width="500"
+            CornerRadius="250">
+            <Border.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#33808080"/>
+                    <GradientStop Color="Transparent" Offset="1"/>
+                </RadialGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <local:ButtonClass x:Name="Dign_Up"
+                           Content="Sign Up"
+                           Style="{StaticResource QuickMenuButton}" Margin="125,152,275,298"/>
+        <local:ButtonClass />
+    </Grid>
+</Window>

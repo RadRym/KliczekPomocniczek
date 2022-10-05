@@ -2,8 +2,6 @@
 using System.Windows;
 using System.Windows.Media;
 using Tekla.Structures.Model;
-using Tekla.Structures.Model.Operations;
-using TSMUI = Tekla.Structures.Model.UI;
 
 namespace KliczekPomocniczek
 {
@@ -37,32 +35,17 @@ namespace KliczekPomocniczek
                 changeWeldDirection.weldPositionEnum();
         }
 
-        private void deleteClipPlanes_Click(object sender, RoutedEventArgs e)
-        {
-            clipPlanes.deleteClipPlanes();
-        }
+        private void DeleteClipPlanes_Click(object sender, RoutedEventArgs e) => clipPlanes.deleteClipPlanes();
 
-        private void createClipPlanes_Click(object sender, RoutedEventArgs e)
-        {
-            clipPlanes.createClipPlanes();
-        }
+        private void CreateClipPlanes_Click(object sender, RoutedEventArgs e) => clipPlanes.createClipPlanes();
 
-        private void Ribs_Click(object sender, RoutedEventArgs e)
-        {
-            ribsCuts.prompt();
-        }
+        private void Ribs_Click(object sender, RoutedEventArgs e) => ribsCuts.prompt();
 
-        private void objectCoordynates_Click(object sender, RoutedEventArgs e)
-        {
-            partCoordSyst.Draw();
-        }
+        private void ObjectCoordynates_Click(object sender, RoutedEventArgs e) => partCoordSyst.Draw();
 
-        private void setPartWorkPlane_Click(object sender, RoutedEventArgs e)
-        {
-            partCoordSyst.Set();
-        }
+        private void SetPartWorkPlane_Click(object sender, RoutedEventArgs e) => partCoordSyst.Set();
 
-        private void setTemporaryColor_Click(object sender, RoutedEventArgs e)
+        private void SetTemporaryColor_Click(object sender, RoutedEventArgs e)
         {
             var @object = setComboColors.SelectedItem.ToString();
             string[] parts = @object.Split(' ');
@@ -71,13 +54,21 @@ namespace KliczekPomocniczek
             viewClass.setTemporaryColor(color);
         }
 
-        private void selectTemporaryColor_Click(object sender, RoutedEventArgs e)
+        private void SelectTemporaryColor_Click(object sender, RoutedEventArgs e)
         {
             var @object = setComboColors.SelectedItem.ToString();
             string[] parts = @object.Split(' ');
             string lastWord = parts[parts.Length - 1];
             System.Drawing.Color color = System.Drawing.Color.FromName(lastWord);
             viewClass.selectTemporaryColor(color);
+        }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            QuickMenu.QuickMenuPage quickMenu = new QuickMenu.QuickMenuPage();
+            quickMenu.Show();
+            //PieMenu.MainWindow.PieMenu pieMenu = new PieMenu.MainWindow.PieMenu();
+            //pieMenu.Show();
         }
     }
 }

@@ -57,15 +57,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="QuickMenu\ButtonClass.cs" />
+    <Compile Include="QuickMenu\QuickMenuPage.xaml.cs" />
     <Compile Include="Skills\changeWeldDirection.cs" />
     <Compile Include="Skills\clipPlanes.cs" />
     <Compile Include="Skills\keyboardKeyListener.cs" />
     <Compile Include="Skills\partCoordSyst.cs" />
     <Compile Include="Skills\ribsCuts.cs" />
     <Compile Include="Skills\viewClass.cs" />
-    <Compile Include="Windows\PieMenu.xaml.cs">
-      <DependentUpon>PieMenu.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,9 +77,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\PieMenu.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="QuickMenu\QuickMenuPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
