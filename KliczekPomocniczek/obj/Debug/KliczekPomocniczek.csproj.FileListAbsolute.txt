@@ -22,3 +22,5 @@ E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.c
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.csproj.CopyComplete
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.exe
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.pdb
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\Windows\putSomeDataNieChceMiSie.g.cs
+E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\Windows\putSomeDataNieChceMiSie.baml

@@ -17,18 +17,51 @@
             x:Name="Board"
             Height="500"
             Width="500"
-            CornerRadius="250">
-            <Border.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="#33808080"/>
-                    <GradientStop Color="Transparent" Offset="1"/>
-                </RadialGradientBrush>
-            </Border.Background>
-        </Border>
+            CornerRadius="250" Margin="-10,-6,10,6"/>
 
-        <local:ButtonClass x:Name="Dign_Up"
-                           Content="Sign Up"
-                           Style="{StaticResource QuickMenuButton}" Margin="125,152,275,298"/>
-        <local:ButtonClass />
+        <local:ButtonClass x:Name="CreateClipPlanes"
+                           Click="CreateClipPlanes_Click"
+                           Margin="280,170,170,280"
+                           Style="{StaticResource QuickMenuButton}">
+            <Image Source="/Icons/CutBox.png" Height="40" Width="40" Margin="5 5 0 0"/>
+        </local:ButtonClass>
+        <local:ButtonClass x:Name="DeleteClipPlanes"
+                           Click="DeleteClipPlanes_Click"
+                           Margin="280,225,170,225"
+                           Style="{StaticResource QuickMenuButton}" >
+            <Image Source="/Icons/NoCutBox.png" Height="40" Width="40"  Margin="2 2 0 0"/>
+        </local:ButtonClass>
+        <local:ButtonClass x:Name="ObjectsCoordynates"
+                           Click="ObjectsCoordynates_Click"
+                           Margin="335,225,115,225"
+                           Style="{StaticResource QuickMenuButton}" >
+            <Image Source="/Icons/Xyz.png" Height="40" Width="40" />
+        </local:ButtonClass>
+        <local:ButtonClass x:Name="SetPartWorkplane"
+                           Click="SetPartWorkplane_Click"
+                           Margin="335,170,115,280"
+                           Style="{StaticResource QuickMenuButton}" >
+            <Image Source="/Icons/Workplane.png" Height="35" Width="35" Margin="3 -5 0 0"/>
+        </local:ButtonClass>
+        <local:ButtonClass x:Name="Redraw"
+                           Click="Redraw_Click"
+                           Margin="280,280,170,170"
+                           Style="{StaticResource QuickMenuButton}" >
+            <Image Source="/Icons/Redraw.png" Height="30" Width="30"/>
+        </local:ButtonClass>
+        
+        <local:ButtonClass x:Name="CSVfiles"
+                           Click="CSVfiles_Click"
+                           Margin="335,280,115,170"
+                           Style="{StaticResource QuickMenuButton}" >
+            <Image Source="/Icons/FileToCSV.png" Height="40" Width="40"/>
+        </local:ButtonClass>
+        
+        <local:ButtonClass x:Name="Hide"
+                           Click="Hide_Click"
+                           Margin="0 0 0 0"
+                           Style="{StaticResource QuickMenuButton}" >
+            <Image Source="/Icons/close.png" Height="20" Width="20"/>
+        </local:ButtonClass>
     </Grid>
 </Window>

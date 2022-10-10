@@ -1,22 +1,24 @@
-﻿using KliczekPomocniczek.Skills;
+﻿using KliczekPomocniczek.QuickMenu;
+using KliczekPomocniczek.Skills;
+using KliczekPomocniczek.Windows;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Media;
 using Tekla.Structures.Model;
+using MessageBox = System.Windows.MessageBox;
 
 namespace KliczekPomocniczek
 {
     public partial class MainWindow : Window
     {
         public keyboardKeyListener listener;
+        public static QuickMenuPage QuickMenuPage = new QuickMenuPage();
+        public static putSomeDataNieChceMiSie putSomeDataNieChceMiSie = new putSomeDataNieChceMiSie();
         public static System.Windows.Input.Key keyChangeWeldPosition = System.Windows.Input.Key.Space;
 
         public MainWindow()
         {
             InitializeComponent();
-            setComboColors.ItemsSource = typeof(Colors).GetProperties();
-            setComboColors.Text = "-----Select-----";
-            selectComboColors.ItemsSource = typeof(Colors).GetProperties();
-            selectComboColors.Text = "-----Select-----";
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -30,9 +32,20 @@ namespace KliczekPomocniczek
         {
             Model model = new Model();
             if (e.KeyPressed == keyChangeWeldPosition &&
-                checkBox_WeldPosition.IsChecked == true &&
-                model.GetConnectionStatus())
+                checkBox_WeldPosition.IsChecked == true)
                 changeWeldDirection.weldPositionEnum();
+            else return;
+
+            if (e.KeyPressed == System.Windows.Input.Key.Down &&
+                QuickMenuPage.IsActive == false)
+            {
+                QuickMenuPage.WindowStartupLocation = WindowStartupLocation.Manual;
+                QuickMenuPage.Left = System.Windows.Forms.Control.MousePosition.X - 250;
+                QuickMenuPage.Top = System.Windows.Forms.Control.MousePosition.Y - 250;
+                QuickMenuPage.Topmost = true;
+                QuickMenuPage.Show();
+            }
+            else return;
         }
 
         private void DeleteClipPlanes_Click(object sender, RoutedEventArgs e) => clipPlanes.deleteClipPlanes();
@@ -65,10 +78,15 @@ namespace KliczekPomocniczek
 
         private void Test_Click(object sender, RoutedEventArgs e)
         {
-            QuickMenu.QuickMenuPage quickMenu = new QuickMenu.QuickMenuPage();
-            quickMenu.Show();
-            //PieMenu.MainWindow.PieMenu pieMenu = new PieMenu.MainWindow.PieMenu();
-            //pieMenu.Show();
+            QuickMenuPage.Show();
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            listener.UnHookKeyboard();
+            QuickMenuPage.Close();
+            putSomeDataNieChceMiSie.Close();
+            this.Close();   
         }
     }
 }

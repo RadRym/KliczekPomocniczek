@@ -15,8 +15,8 @@ namespace KliczekPomocniczek.Skills
 
             while (selectedObjects.MoveNext())
             {
-            var weld = selectedObjects.Current as TSM.Weld;
-            TSM.Weld.WeldPositionEnum weldPositionEnum = weld.Position;
+                var weld = selectedObjects.Current as TSM.Weld;
+                TSM.Weld.WeldPositionEnum weldPositionEnum = weld.Position;
                 if ((selectedObjects.Current as TSM.Weld) != null)
                 {
                     if (weldPositionEnum == TSMW.WELD_POSITION_PLUS_X)
@@ -35,6 +35,25 @@ namespace KliczekPomocniczek.Skills
                 weld.Modify();
             }
             Model.CommitChanges();
+        }
+        public static bool isWeldSelected()
+        {
+            TSM.Model Model = new TSM.Model();
+            TSMUI.ModelObjectSelector modelSelector = new TSMUI.ModelObjectSelector();
+            TSM.ModelObjectEnumerator selectedObjects = (modelSelector.GetSelectedObjects() as TSM.ModelObjectEnumerator);
+
+            int falseOrTrue = 0;
+            foreach (var obj in selectedObjects)
+            {
+                if (obj is Weld)
+                    falseOrTrue++;
+                else continue;
+            }
+
+            if(falseOrTrue == 0)
+                return false;
+            else return true;
+
         }
     }
 }

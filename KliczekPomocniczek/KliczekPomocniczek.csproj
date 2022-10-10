@@ -61,10 +61,14 @@
     <Compile Include="QuickMenu\QuickMenuPage.xaml.cs" />
     <Compile Include="Skills\changeWeldDirection.cs" />
     <Compile Include="Skills\clipPlanes.cs" />
+    <Compile Include="Skills\CSVlist.cs" />
     <Compile Include="Skills\keyboardKeyListener.cs" />
     <Compile Include="Skills\partCoordSyst.cs" />
     <Compile Include="Skills\ribsCuts.cs" />
     <Compile Include="Skills\viewClass.cs" />
+    <Compile Include="Windows\putSomeDataNieChceMiSie.xaml.cs">
+      <DependentUpon>putSomeDataNieChceMiSie.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,6 +84,10 @@
     <Page Include="QuickMenu\QuickMenuPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\putSomeDataNieChceMiSie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +123,27 @@
     <PackageReference Include="Tekla.Structures.Model">
       <Version>2021.0.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\cancel.png" />
+    <Resource Include="Icons\CutBox.png" />
+    <Resource Include="Icons\NoCutBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Workplane.png" />
+    <Resource Include="Icons\Xyz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Redraw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\CSVfiles.png" />
+    <Resource Include="Icons\FileToCSV.png" />
+    <Resource Include="Icons\icon.ico" />
+    <Resource Include="Icons\icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

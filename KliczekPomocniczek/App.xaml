@@ -19,7 +19,7 @@
             <Setter Property="FontFamily" Value="Arial" />
             <Setter Property="Background" Value="Coral" />
             <Setter Property="Height" Value="50" />
-            <Setter Property="Width" Value="100" />
+            <Setter Property="Width" Value="50" />
             <Setter Property="BorderBrush" Value="#fff"/>
             
 

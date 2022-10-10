@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KliczekPomocniczek.Skills;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,47 @@ namespace KliczekPomocniczek.QuickMenu
         public QuickMenuPage()
         {
             InitializeComponent();
+        }
+
+        private void DeleteClipPlanes_Click(object sender, RoutedEventArgs e)
+        {
+            clipPlanes.deleteClipPlanes();
+            this.Hide();
+        }
+
+        private void CreateClipPlanes_Click(object sender, RoutedEventArgs e)
+        {
+            clipPlanes.createClipPlanes();
+            this.Hide();
+        }
+
+        private void ObjectsCoordynates_Click(object sender, RoutedEventArgs e)
+        {
+            partCoordSyst.Draw();
+            this.Hide();
+        }
+
+        private void SetPartWorkplane_Click(object sender, RoutedEventArgs e)
+        {
+            partCoordSyst.Set();
+            this.Hide();
+        }
+
+        private void Redraw_Click(object sender, RoutedEventArgs e)
+        {
+            partCoordSyst.Redraw();
+            this.Hide();
+        }
+
+        private void CSVfiles_Click(object sender, RoutedEventArgs e)
+        {
+            CSVlist.filesToCSV();
+            this.Hide();
+        }
+
+        private void Hide_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
         }
     }
 }
