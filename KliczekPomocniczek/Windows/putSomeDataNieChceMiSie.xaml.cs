@@ -24,7 +24,11 @@ namespace KliczekPomocniczek.Windows
         {
             InitializeComponent();
         }
-        private void Ok_Click(object sender, RoutedEventArgs e) => this.Hide();
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            CSVlist.filesToCSV();
+        }
 
         public void What_TextChanged(object sender, TextChangedEventArgs e)
         {

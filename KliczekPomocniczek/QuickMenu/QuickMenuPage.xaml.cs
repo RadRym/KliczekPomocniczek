@@ -1,4 +1,5 @@
 ﻿using KliczekPomocniczek.Skills;
+using KliczekPomocniczek.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace KliczekPomocniczek.QuickMenu
     /// </summary>
     public partial class QuickMenuPage : Window
     {
+        public static putSomeDataNieChceMiSie putSomeDataNieChceMiSie = new putSomeDataNieChceMiSie();
+
         public QuickMenuPage()
         {
             InitializeComponent();
@@ -57,8 +60,8 @@ namespace KliczekPomocniczek.QuickMenu
 
         private void CSVfiles_Click(object sender, RoutedEventArgs e)
         {
-            CSVlist.filesToCSV();
             this.Hide();
+            putSomeDataNieChceMiSie.Show();
         }
 
         private void Hide_Click(object sender, RoutedEventArgs e)

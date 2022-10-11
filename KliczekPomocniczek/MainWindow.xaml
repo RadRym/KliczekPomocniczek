@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KliczekPomocniczek"
         mc:Ignorable="d"
-        Title="Kliczek Pomocniczek" Height="250" Width="230" Loaded="Window_Loaded" Closed="Window_Closed">
+        Title="Kliczek Pomocniczek" Height="250" Width="230" Loaded="Window_Loaded" Closed="Window_Closed" WindowState="Minimized" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>

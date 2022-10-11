@@ -2,10 +2,7 @@
 using KliczekPomocniczek.Skills;
 using KliczekPomocniczek.Windows;
 using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Media;
 using Tekla.Structures.Model;
-using MessageBox = System.Windows.MessageBox;
 
 namespace KliczekPomocniczek
 {
@@ -34,7 +31,6 @@ namespace KliczekPomocniczek
             if (e.KeyPressed == keyChangeWeldPosition &&
                 checkBox_WeldPosition.IsChecked == true)
                 changeWeldDirection.weldPositionEnum();
-            else return;
 
             if (e.KeyPressed == System.Windows.Input.Key.Down &&
                 QuickMenuPage.IsActive == false)
@@ -45,7 +41,6 @@ namespace KliczekPomocniczek
                 QuickMenuPage.Topmost = true;
                 QuickMenuPage.Show();
             }
-            else return;
         }
 
         private void DeleteClipPlanes_Click(object sender, RoutedEventArgs e) => clipPlanes.deleteClipPlanes();
@@ -86,7 +81,7 @@ namespace KliczekPomocniczek
             listener.UnHookKeyboard();
             QuickMenuPage.Close();
             putSomeDataNieChceMiSie.Close();
-            this.Close();   
+            this.Close();
         }
     }
 }
