@@ -8,7 +8,6 @@ E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.c
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.csproj.SuggestedBindingRedirects.cache
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\MainWindow.g.cs
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\QuickMenu\QuickMenuPage.g.cs
-E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\Windows\putSomeDataNieChceMiSie.g.cs
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\App.g.cs
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek_MarkupCompile.cache
@@ -16,7 +15,6 @@ E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek_M
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\App.baml
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\MainWindow.baml
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\QuickMenu\QuickMenuPage.baml
-E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\Windows\putSomeDataNieChceMiSie.baml
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.g.resources
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.Properties.Resources.resources
 E:\Projects\KliczekPomocniczek\KliczekPomocniczek\obj\Debug\KliczekPomocniczek.csproj.GenerateResource.cache

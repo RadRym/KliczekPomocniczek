@@ -59,16 +59,15 @@
     </ApplicationDefinition>
     <Compile Include="QuickMenu\ButtonClass.cs" />
     <Compile Include="QuickMenu\QuickMenuPage.xaml.cs" />
+    <Compile Include="Skills\activeWindows.cs" />
     <Compile Include="Skills\changeWeldDirection.cs" />
     <Compile Include="Skills\clipPlanes.cs" />
     <Compile Include="Skills\CSVlist.cs" />
+    <Compile Include="Skills\gridManipulation.cs" />
     <Compile Include="Skills\keyboardKeyListener.cs" />
     <Compile Include="Skills\partCoordSyst.cs" />
     <Compile Include="Skills\ribsCuts.cs" />
     <Compile Include="Skills\viewClass.cs" />
-    <Compile Include="Windows\putSomeDataNieChceMiSie.xaml.cs">
-      <DependentUpon>putSomeDataNieChceMiSie.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -84,10 +83,6 @@
     <Page Include="QuickMenu\QuickMenuPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\putSomeDataNieChceMiSie.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +139,9 @@
     <Resource Include="Icons\FileToCSV.png" />
     <Resource Include="Icons\icon.ico" />
     <Resource Include="Icons\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Windows\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

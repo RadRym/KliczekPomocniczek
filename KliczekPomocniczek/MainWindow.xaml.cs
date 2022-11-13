@@ -1,8 +1,11 @@
 ﻿using KliczekPomocniczek.QuickMenu;
 using KliczekPomocniczek.Skills;
-using KliczekPomocniczek.Windows;
+using System;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Forms;
 using Tekla.Structures.Model;
+using MessageBox = System.Windows.MessageBox;
 
 namespace KliczekPomocniczek
 {
@@ -10,12 +13,15 @@ namespace KliczekPomocniczek
     {
         public keyboardKeyListener listener;
         public static QuickMenuPage QuickMenuPage = new QuickMenuPage();
-        public static putSomeDataNieChceMiSie putSomeDataNieChceMiSie = new putSomeDataNieChceMiSie();
         public static System.Windows.Input.Key keyChangeWeldPosition = System.Windows.Input.Key.Space;
 
         public MainWindow()
         {
             InitializeComponent();
+            foreach(String stringg in gridManipulation.nameLabel())
+            {
+                TextTesy.Text += stringg + "\n";
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -58,6 +64,7 @@ namespace KliczekPomocniczek
             var @object = setComboColors.SelectedItem.ToString();
             string[] parts = @object.Split(' ');
             string lastWord = parts[parts.Length - 1];
+
             System.Drawing.Color color = System.Drawing.Color.FromName(lastWord);
             viewClass.setTemporaryColor(color);
         }
@@ -67,21 +74,36 @@ namespace KliczekPomocniczek
             var @object = setComboColors.SelectedItem.ToString();
             string[] parts = @object.Split(' ');
             string lastWord = parts[parts.Length - 1];
+
+
             System.Drawing.Color color = System.Drawing.Color.FromName(lastWord);
             viewClass.selectTemporaryColor(color);
         }
 
         private void Test_Click(object sender, RoutedEventArgs e)
         {
-            QuickMenuPage.Show();
+            MessageBox.Show(activeWindows.ActiveWindowTitle());
         }
 
         private void Window_Closed(object sender, System.EventArgs e)
         {
             listener.UnHookKeyboard();
             QuickMenuPage.Close();
-            putSomeDataNieChceMiSie.Close();
-            this.Close();
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DialogResult result = (DialogResult)System.Windows.MessageBox.Show("Czy na pewno chcesz zamknąć program mordo?", "Closing",
+                MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if(result == System.Windows.Forms.DialogResult.Yes)
+            {
+                Window_Closed(sender, e);
+            }
+            else if (result == System.Windows.Forms.DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

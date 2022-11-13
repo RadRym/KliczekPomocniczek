@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KliczekPomocniczek"
         mc:Ignorable="d"
-        Title="Kliczek Pomocniczek" Height="250" Width="230" Loaded="Window_Loaded" Closed="Window_Closed" WindowState="Minimized" ResizeMode="NoResize">
+        Title="Kliczek Pomocniczek" Height="250" Width="230" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing" WindowStyle="ThreeDBorderWindow" ResizeMode="CanResizeWithGrip">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
@@ -48,6 +48,9 @@
                 Grid.Column="1" Grid.Row="8" Click="Ribs_Click"/>
         <Button x:Name="test" Content="test"
                 Grid.Column="1" Grid.Row="9" Click="Test_Click"/>
+
+        <TextBox x:Name="TextTesy" Grid.Row="10" Grid.Column="1"
+                 Grid.RowSpan="2"/>
 
         <ComboBox Name="setComboColors"
                   Grid.Column="2" Grid.Row="6">

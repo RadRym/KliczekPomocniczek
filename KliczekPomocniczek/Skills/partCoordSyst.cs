@@ -27,7 +27,6 @@ namespace KliczekPomocniczek.Skills
                 if(modelObject is TSM.ModelObject)
                 {
                 var drawer = new GraphicsDrawer();
-                var color = new Tekla.Structures.Model.UI.Color(1, 1, 1);
                 TransformationPlane localPlane = new TransformationPlane(modelObject.GetCoordinateSystem());
                 model.GetWorkPlaneHandler().SetCurrentTransformationPlane(localPlane);
                 var location = modelObject.GetCoordinateSystem().Origin;
