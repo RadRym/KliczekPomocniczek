@@ -1,4 +1,5 @@
 ﻿using KliczekPomocniczek.QuickMenu;
+using System;
 using System.CodeDom;
 using Tekla.Structures.Geometry3d;
 using Tekla.Structures.Model;
@@ -15,56 +16,77 @@ namespace KliczekPomocniczek.Skills
         public static QuickMenuPage QuickMenuPage = new QuickMenuPage();
         public static void Draw()
         {
-            Model model = new Model();
-            ModelObjectEnumerator.AutoFetch = true;
-            TSMUI.ModelObjectSelector modelSelector = new TSMUI.ModelObjectSelector();
-            TSM.ModelObjectEnumerator modelObjects = (modelSelector.GetSelectedObjects() as TSM.ModelObjectEnumerator);
-
-            TransformationPlane currentPlane = model.GetWorkPlaneHandler().GetCurrentTransformationPlane();
-
-            foreach (Part modelObject in modelObjects)
+            try
             {
-                if(modelObject is TSM.ModelObject)
+                Model model = new Model();
+                ModelObjectEnumerator.AutoFetch = true;
+                TSMUI.ModelObjectSelector modelSelector = new TSMUI.ModelObjectSelector();
+                TSM.ModelObjectEnumerator modelObjects = (modelSelector.GetSelectedObjects() as TSM.ModelObjectEnumerator);
+
+                TransformationPlane currentPlane = model.GetWorkPlaneHandler().GetCurrentTransformationPlane();
+
+                foreach (Part modelObject in modelObjects)
                 {
-                var drawer = new GraphicsDrawer();
-                TransformationPlane localPlane = new TransformationPlane(modelObject.GetCoordinateSystem());
-                model.GetWorkPlaneHandler().SetCurrentTransformationPlane(localPlane);
-                var location = modelObject.GetCoordinateSystem().Origin;
+                    if (modelObject is TSM.ModelObject)
+                    {
+                        var drawer = new GraphicsDrawer();
+                        TransformationPlane localPlane = new TransformationPlane(modelObject.GetCoordinateSystem());
+                        model.GetWorkPlaneHandler().SetCurrentTransformationPlane(localPlane);
+                        var location = modelObject.GetCoordinateSystem().Origin;
 
-                drawer.DrawLineSegment(location, location + new Point(100, 0, 0), new Color(1, 0, 0));
-                drawer.DrawText(location + new Point(100, 0, 0), "X", new Color(1, 0, 0));
-                drawer.DrawLineSegment(location, location + new Point(0, 100, 0), new Color(0, 1, 0.0));
-                drawer.DrawText(location + new Point(0, 100, 0), "Y", new Color(0, 1, 0.0));
-                drawer.DrawLineSegment(location, location + new Point(0, 0, 100), new Color(0, 0, 1));
-                drawer.DrawText(location + new Point(0, 0, 100), "Z", new Color(0, 0, 1));
+                        drawer.DrawLineSegment(location, location + new Point(100, 0, 0), new Color(1, 0, 0));
+                        drawer.DrawText(location + new Point(100, 0, 0), "X", new Color(1, 0, 0));
+                        drawer.DrawLineSegment(location, location + new Point(0, 100, 0), new Color(0, 1, 0.0));
+                        drawer.DrawText(location + new Point(0, 100, 0), "Y", new Color(0, 1, 0.0));
+                        drawer.DrawLineSegment(location, location + new Point(0, 0, 100), new Color(0, 0, 1));
+                        drawer.DrawText(location + new Point(0, 0, 100), "Z", new Color(0, 0, 1));
+                    }
+                    else return;
+
                 }
-                else return;
-
+                model.GetWorkPlaneHandler().SetCurrentTransformationPlane(currentPlane);
             }
-            model.GetWorkPlaneHandler().SetCurrentTransformationPlane(currentPlane);
+            catch (Exception ex)
+            {
+                Logger.WritrLog(ex.Message);
+            }
         }
         
         public static void Set()
         {
-            Operation.DisplayPrompt("Wyemancypowany typie zaznacz parta do którego chcesz się przykleić");
-            if (QuickMenuPage.IsActive == true)
-                QuickMenuPage.Hide();
-            Model model = new Model();
-            var modelObject = new Picker().PickObject(Picker.PickObjectEnum.PICK_ONE_PART);
-            CoordinateSystem PartCoordinate = modelObject.GetCoordinateSystem();
-            TransformationPlane PartPlane = new TransformationPlane(PartCoordinate);
-            model.GetWorkPlaneHandler().SetCurrentTransformationPlane(PartPlane);
-            model.CommitChanges();
-            ViewHandler.RedrawWorkplane();
+            try
+            {
+                Operation.DisplayPrompt("Wyemancypowany typie zaznacz parta do którego chcesz się przykleić");
+                if (QuickMenuPage.IsActive == true)
+                    QuickMenuPage.Hide();
+                Model model = new Model();
+                var modelObject = new Picker().PickObject(Picker.PickObjectEnum.PICK_ONE_PART);
+                CoordinateSystem PartCoordinate = modelObject.GetCoordinateSystem();
+                TransformationPlane PartPlane = new TransformationPlane(PartCoordinate);
+                model.GetWorkPlaneHandler().SetCurrentTransformationPlane(PartPlane);
+                model.CommitChanges();
+                ViewHandler.RedrawWorkplane();
+            }
+            catch (Exception ex)
+            {
+                Logger.WritrLog(ex.Message);
+            }
         }
 
         public static void Redraw()
         {
-            ModelViewEnumerator ViewEnum = ViewHandler.GetAllViews();
-            while (ViewEnum.MoveNext())
+            try
             {
-                View ViewSel = ViewEnum.Current;
-                ViewHandler.RedrawView(ViewSel);
+                ModelViewEnumerator ViewEnum = ViewHandler.GetAllViews();
+                while (ViewEnum.MoveNext())
+                {
+                    View ViewSel = ViewEnum.Current;
+                    ViewHandler.RedrawView(ViewSel);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WritrLog(ex.Message);
             }
         }
     }

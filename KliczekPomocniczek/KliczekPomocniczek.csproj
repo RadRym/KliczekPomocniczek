@@ -34,8 +34,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -66,6 +70,7 @@
     <Compile Include="Skills\CSVlist.cs" />
     <Compile Include="Skills\gridManipulation.cs" />
     <Compile Include="Skills\keyboardKeyListener.cs" />
+    <Compile Include="Skills\Logger.cs" />
     <Compile Include="Skills\partCoordSyst.cs" />
     <Compile Include="Skills\ribsCuts.cs" />
     <Compile Include="Skills\viewClass.cs" />
@@ -143,6 +148,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Windows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

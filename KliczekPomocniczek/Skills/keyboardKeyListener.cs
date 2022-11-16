@@ -53,30 +53,46 @@ namespace KliczekPomocniczek.Skills
 
         private IntPtr SetHook(LowLevelKeyboardProc proc)
         {
-            using (Process curProcess = Process.GetCurrentProcess())
-            using (ProcessModule curModule = curProcess.MainModule)
+            try
             {
-                return SetWindowsHookEx(WH_KEYBOARD_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
+                using (Process curProcess = Process.GetCurrentProcess())
+                using (ProcessModule curModule = curProcess.MainModule)
+                {
+                    return SetWindowsHookEx(WH_KEYBOARD_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WritrLog(ex.Message);
+                return IntPtr.Zero;
             }
         }
 
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            if (nCode >= 0 && wParam == (IntPtr)WM_KEYDOWN || wParam == (IntPtr)WM_SYSKEYDOWN)
+            try
             {
-                int vkCode = Marshal.ReadInt32(lParam);
+                if (nCode >= 0 && wParam == (IntPtr)WM_KEYDOWN || wParam == (IntPtr)WM_SYSKEYDOWN)
+                {
+                    int vkCode = Marshal.ReadInt32(lParam);
 
-                if (OnKeyPressed != null) { OnKeyPressed(this, new KeyPressedArgs(KeyInterop.KeyFromVirtualKey(vkCode))); }
+                    if (OnKeyPressed != null) { OnKeyPressed(this, new KeyPressedArgs(KeyInterop.KeyFromVirtualKey(vkCode))); }
+                }
+
+                if (nCode >= 0 && wParam == (IntPtr)WM_KEYUP || wParam == (IntPtr)WM_SYSKEYUP)
+                {
+                    int vkCode = Marshal.ReadInt32(lParam);
+
+                    if (OnKeyReleased != null) { OnKeyReleased(this, new KeyReleasedArgs(KeyInterop.KeyFromVirtualKey(vkCode))); }
+                }
+
+                return CallNextHookEx(_hookID, nCode, wParam, lParam);
             }
-
-            if (nCode >= 0 && wParam == (IntPtr)WM_KEYUP || wParam == (IntPtr)WM_SYSKEYUP)
+            catch (Exception ex)
             {
-                int vkCode = Marshal.ReadInt32(lParam);
-
-                if (OnKeyReleased != null) { OnKeyReleased(this, new KeyReleasedArgs(KeyInterop.KeyFromVirtualKey(vkCode))); }
+                Logger.WritrLog(ex.Message);
+                return IntPtr.Zero;
             }
-
-            return CallNextHookEx(_hookID, nCode, wParam, lParam);
         }
     }
 

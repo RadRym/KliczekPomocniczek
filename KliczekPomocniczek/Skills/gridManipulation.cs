@@ -14,33 +14,49 @@ namespace KliczekPomocniczek.Skills
     {
         public static List<string> nameLabel()
         {
-            TSM.Model Model = new TSM.Model();
-            System.Type[] types = new System.Type[1];
-            types.SetValue(typeof(Grid), 0);
-            List<string> strings = new List<string>();
-            ModelObjectEnumerator myEnum = Model.GetModelObjectSelector().GetAllObjectsWithType(types);
-            foreach(Grid grid in myEnum)
+            try
             {
-                strings.Add(grid.LabelX);
-                strings.Add(grid.LabelY);
-                strings.Add(grid.LabelZ);
+                TSM.Model Model = new TSM.Model();
+                System.Type[] types = new System.Type[1];
+                types.SetValue(typeof(Grid), 0);
+                List<string> strings = new List<string>();
+                ModelObjectEnumerator myEnum = Model.GetModelObjectSelector().GetAllObjectsWithType(types);
+                foreach (Grid grid in myEnum)
+                {
+                    strings.Add(grid.LabelX);
+                    strings.Add(grid.LabelY);
+                    strings.Add(grid.LabelZ);
+                }
+                return strings;
             }
-            return strings;
+            catch (Exception ex)
+            {
+                Logger.WritrLog(ex.Message);
+                return null;
+            }
         }
         
         public static List<string> LabelsGrid()
         {
-            List<string> LabelsGrid = new List<string>();
-            for (int k = 0; k< gridManipulation.nameLabel().Count(); k++)
+            try
             {
-                string stringNameLabel = gridManipulation.nameLabel()[k];
-                string[] strings = stringNameLabel.Split(' ');
-                for (int i = 0; i < strings.Length; i++)
+                List<string> LabelsGrid = new List<string>();
+                for (int k = 0; k < gridManipulation.nameLabel().Count(); k++)
                 {
-                    LabelsGrid.Add(strings[i]);
+                    string stringNameLabel = gridManipulation.nameLabel()[k];
+                    string[] strings = stringNameLabel.Split(' ');
+                    for (int i = 0; i < strings.Length; i++)
+                    {
+                        LabelsGrid.Add(strings[i]);
+                    }
                 }
+                return LabelsGrid;
             }
-            return LabelsGrid;
+            catch (Exception ex)
+            {
+                Logger.WritrLog(ex.Message);
+                return null;
+            }
         }
     }
 }
