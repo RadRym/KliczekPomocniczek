@@ -18,6 +18,7 @@ namespace KliczekPomocniczek.Skills
 
         public static void createClipPlanes()
         {
+            deleteClipPlanes();
             TSM.Model Model = new TSM.Model();
             TSMUI.ModelObjectSelector modelSelector = new TSMUI.ModelObjectSelector();
             TSM.ModelObjectEnumerator selectedObjects = (modelSelector.GetSelectedObjects() as TSM.ModelObjectEnumerator);
@@ -52,7 +53,7 @@ namespace KliczekPomocniczek.Skills
                 }
                 else if ((selectedObjects.Current as TSM.Component) != null)
                 {
-                    Operation.DisplayPrompt("Wypierdalaj z tymi komponentami");
+                    Operation.DisplayPrompt("Komponenty nie są obsługiwane");
                     break;
                 }
             }

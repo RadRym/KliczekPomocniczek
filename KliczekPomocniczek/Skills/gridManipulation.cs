@@ -27,5 +27,20 @@ namespace KliczekPomocniczek.Skills
             }
             return strings;
         }
+        
+        public static List<string> LabelsGrid()
+        {
+            List<string> LabelsGrid = new List<string>();
+            for (int k = 0; k< gridManipulation.nameLabel().Count(); k++)
+            {
+                string stringNameLabel = gridManipulation.nameLabel()[k];
+                string[] strings = stringNameLabel.Split(' ');
+                for (int i = 0; i < strings.Length; i++)
+                {
+                    LabelsGrid.Add(strings[i]);
+                }
+            }
+            return LabelsGrid;
+        }
     }
 }

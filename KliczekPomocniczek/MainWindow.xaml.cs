@@ -1,7 +1,5 @@
 ﻿using KliczekPomocniczek.QuickMenu;
 using KliczekPomocniczek.Skills;
-using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Forms;
 using Tekla.Structures.Model;
@@ -11,17 +9,17 @@ namespace KliczekPomocniczek
 {
     public partial class MainWindow : Window
     {
+        #region Definitions
+
         public keyboardKeyListener listener;
         public static QuickMenuPage QuickMenuPage = new QuickMenuPage();
         public static System.Windows.Input.Key keyChangeWeldPosition = System.Windows.Input.Key.Space;
+        #endregion
 
         public MainWindow()
         {
             InitializeComponent();
-            foreach(String stringg in gridManipulation.nameLabel())
-            {
-                TextTesy.Text += stringg + "\n";
-            }
+            DataContext = new comboboxes();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -53,34 +51,16 @@ namespace KliczekPomocniczek
 
         private void CreateClipPlanes_Click(object sender, RoutedEventArgs e) => clipPlanes.createClipPlanes();
 
-        private void Ribs_Click(object sender, RoutedEventArgs e) => ribsCuts.prompt();
-
         private void ObjectCoordynates_Click(object sender, RoutedEventArgs e) => partCoordSyst.Draw();
 
         private void SetPartWorkPlane_Click(object sender, RoutedEventArgs e) => partCoordSyst.Set();
 
-        private void SetTemporaryColor_Click(object sender, RoutedEventArgs e)
+        private void Test1_Click(object sender, RoutedEventArgs e)
         {
-            var @object = setComboColors.SelectedItem.ToString();
-            string[] parts = @object.Split(' ');
-            string lastWord = parts[parts.Length - 1];
-
-            System.Drawing.Color color = System.Drawing.Color.FromName(lastWord);
-            viewClass.setTemporaryColor(color);
+            var gridXLabels = gridManipulation.nameLabel()[0];
         }
 
-        private void SelectTemporaryColor_Click(object sender, RoutedEventArgs e)
-        {
-            var @object = setComboColors.SelectedItem.ToString();
-            string[] parts = @object.Split(' ');
-            string lastWord = parts[parts.Length - 1];
-
-
-            System.Drawing.Color color = System.Drawing.Color.FromName(lastWord);
-            viewClass.selectTemporaryColor(color);
-        }
-
-        private void Test_Click(object sender, RoutedEventArgs e)
+        private void Test2_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(activeWindows.ActiveWindowTitle());
         }
@@ -105,5 +85,7 @@ namespace KliczekPomocniczek
                 e.Cancel = true;
             }
         }
+
+        
     }
 }

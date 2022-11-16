@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
@@ -17,19 +14,16 @@ namespace KliczekPomocniczek.Skills
 
         public static string ActiveWindowTitle()
         {
-            //Create the variable
             const int nChar = 256;
             StringBuilder ss = new StringBuilder(nChar);
 
-            //Run GetForeGroundWindows and get active window informations
-            //assign them into handle pointer variable
             IntPtr handle = IntPtr.Zero;
             handle = GetForegroundWindow();
-
 
             if (GetWindowText(handle, ss, nChar) > 0) return ss.ToString();
             else return "";
         }
+
         public static bool isActive(string NameProc)
         {
             int n = 0;

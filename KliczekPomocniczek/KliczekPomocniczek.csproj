@@ -62,6 +62,7 @@
     <Compile Include="Skills\activeWindows.cs" />
     <Compile Include="Skills\changeWeldDirection.cs" />
     <Compile Include="Skills\clipPlanes.cs" />
+    <Compile Include="Skills\comboboxes.cs" />
     <Compile Include="Skills\CSVlist.cs" />
     <Compile Include="Skills\gridManipulation.cs" />
     <Compile Include="Skills\keyboardKeyListener.cs" />

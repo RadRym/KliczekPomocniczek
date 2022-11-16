@@ -46,7 +46,7 @@ namespace KliczekPomocniczek.Skills
         
         public static void Set()
         {
-            Operation.DisplayPrompt("Wyemanypowany typie zaznacz parta do którego chcesz się przykleić");
+            Operation.DisplayPrompt("Wyemancypowany typie zaznacz parta do którego chcesz się przykleić");
             if (QuickMenuPage.IsActive == true)
                 QuickMenuPage.Hide();
             Model model = new Model();

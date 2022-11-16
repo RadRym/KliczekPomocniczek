@@ -40,31 +40,25 @@
                 Grid.Column="1" Grid.Row="4" Click="ObjectCoordynates_Click"/>
         <Button x:Name="setPartWorkPlane" Content="Set Part Work Plane"
                 Grid.Column="1" Grid.Row="5" Click="SetPartWorkPlane_Click"/>
-        <Button x:Name="setTemporaryColor" Content="Set Temporary Color"
-                Grid.Column="1" Grid.Row="6" Click="SetTemporaryColor_Click"/>
-        <Button x:Name="selectTemporaryColor" Content="Select Temporary Color"
-                Grid.Column="1" Grid.Row="7" Click="SelectTemporaryColor_Click"/>
-        <Button x:Name="Ribs" Content="Ribs" IsEnabled="False"
-                Grid.Column="1" Grid.Row="8" Click="Ribs_Click"/>
-        <Button x:Name="test" Content="test"
-                Grid.Column="1" Grid.Row="9" Click="Test_Click"/>
+        <Button x:Name="Test1" Content="Test1"
+                Grid.Column="1" Grid.Row="6" Click="Test1_Click"/>
+        <Button x:Name="Test2" Content="Test2"
+                Grid.Column="1" Grid.Row="7" Click="Test2_Click"/>
+        <Button x:Name="Test3" Content="Test3" IsEnabled="False"
+                Grid.Column="1" Grid.Row="8"/>
+        <Button x:Name="Test4" Content="Test4"  IsEnabled="False"
+                Grid.Column="1" Grid.Row="9"/>
 
-        <TextBox x:Name="TextTesy" Grid.Row="10" Grid.Column="1"
+        <TextBox x:Name="Text1" Grid.Row="10" Grid.Column="1"
                  Grid.RowSpan="2"/>
 
-        <ComboBox Name="setComboColors"
-                  Grid.Column="2" Grid.Row="6">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Fill="{Binding Name}"  Width="16" Height="16" />
-                        <TextBlock Text ="{Binding Name}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+        <ComboBox Name="Combo1"
+                  Grid.Column="2" 
+                  Grid.Row="6" 
+                  ItemsSource="{Binding GridCollection}"/>
 
-        <ComboBox Name="selectComboColors"
+
+        <ComboBox Name="Combo2"
                   Grid.Column="2" Grid.Row="7">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
