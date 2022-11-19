@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KliczekPomocniczek"
         mc:Ignorable="d"
-        Title="Kliczek Pomocniczek" Height="250" Width="230" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing" WindowStyle="ThreeDBorderWindow" ResizeMode="CanResizeWithGrip">
+        Title="Kliczek Pomocniczek" Height="350" Width="230" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing" WindowStyle="ThreeDBorderWindow" ResizeMode="CanResizeWithGrip">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
@@ -56,7 +56,6 @@
                   Grid.Column="2" 
                   Grid.Row="6" 
                   ItemsSource="{Binding GridCollection}"/>
-
 
         <ComboBox Name="Combo2"
                   Grid.Column="2" Grid.Row="7">

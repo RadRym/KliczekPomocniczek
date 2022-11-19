@@ -1,5 +1,6 @@
 ﻿using KliczekPomocniczek.QuickMenu;
 using KliczekPomocniczek.Skills;
+using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using Tekla.Structures.Model;
@@ -10,7 +11,7 @@ namespace KliczekPomocniczek
     public partial class MainWindow : Window
     {
         #region Definitions
-
+        public static MainWindow main;
         public keyboardKeyListener listener;
         public static QuickMenuPage QuickMenuPage = new QuickMenuPage();
         public static System.Windows.Input.Key keyChangeWeldPosition = System.Windows.Input.Key.Space;
@@ -19,6 +20,7 @@ namespace KliczekPomocniczek
         public MainWindow()
         {
             InitializeComponent();
+            main = this;
             DataContext = new comboboxes();
         }
 
@@ -27,6 +29,40 @@ namespace KliczekPomocniczek
             listener = new keyboardKeyListener();
             listener.OnKeyPressed += Listener_OnKeyPressed;
             listener.HookKeyboard();
+            Thread trackerThread = new Thread(tracker);
+            trackerThread.Start();
+        }
+
+        private void tracker()
+        {
+            while (true)
+            {
+                var point = Control.MousePosition;
+                int x = point.X;
+                MainWindow.main.Dispatcher.Invoke(new System.Action(delegate()
+                {
+                    Screen s = Screen.FromPoint(System.Windows.Forms.Control.MousePosition);
+                    double screenWidth = s.WorkingArea.Width;
+                    double screenHeight = s.WorkingArea.Height;
+                    MainWindow.main.Text1.Text =
+                                    "MousePositionX: " + Control.MousePosition.X.ToString() + " \n" +
+                                    "MousePositionY: " + Control.MousePosition.Y.ToString() + " \n" +
+                                    "VirtualScreenWidth: " + SystemParameters.VirtualScreenWidth.ToString() + " \n" +
+                                    "VirtualScreenHeight: " + SystemParameters.VirtualScreenHeight.ToString() + " \n" +
+                                    "PrimaryScreenWidth: " + SystemParameters.PrimaryScreenWidth.ToString() + " \n" +
+                                    "PrimaryScreenHeight: " + SystemParameters.PrimaryScreenHeight.ToString() + " \n" +
+                                    "FullPrimaryScreenWidth: " + SystemParameters.FullPrimaryScreenWidth.ToString() + " \n" +
+                                    "FullPrimaryScreenHeight: " + SystemParameters.FullPrimaryScreenHeight.ToString() + " \n" +
+                                    "screenWidth: " + screenWidth.ToString() + " \n" +
+                                    "screenHeight: " + screenHeight.ToString() + " \n" +
+                                    "QuickMenuPage.Width: " + QuickMenuPage.Width.ToString() + " \n" +
+                                    "QuickMenuPage.Height: " + QuickMenuPage.Height.ToString() + " \n" +
+                                    "QuickMenuPage.Left: " + QuickMenuPage.Left.ToString() + " \n" +
+                                    "QuickMenuPage.Top: " + QuickMenuPage.Top.ToString() + " \n" +
+                                    s.DeviceName.ToString();
+                }));
+
+            }
         }
 
         public void Listener_OnKeyPressed(object sender, KeyPressedArgs e)
@@ -39,9 +75,8 @@ namespace KliczekPomocniczek
             if (e.KeyPressed == System.Windows.Input.Key.Down &&
                 QuickMenuPage.IsActive == false)
             {
-                QuickMenuPage.WindowStartupLocation = WindowStartupLocation.Manual;
-                QuickMenuPage.Left = System.Windows.Forms.Control.MousePosition.X - 250;
-                QuickMenuPage.Top = System.Windows.Forms.Control.MousePosition.Y - 250;
+                QuickMenuPage.Left = 0.8 * System.Windows.Forms.Control.MousePosition.X - 250;
+                QuickMenuPage.Top = 0.8 * System.Windows.Forms.Control.MousePosition.Y - 250;
                 QuickMenuPage.Topmost = true;
                 QuickMenuPage.Show();
             }
