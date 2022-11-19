@@ -32,7 +32,6 @@ namespace KliczekPomocniczek.QuickMenu
             CSVfiles.Margin = point(5, numberOfIcons);
         }
 
-
         public static Thickness point(int n, int numberOfIcons)
         {
             int radius = 60;

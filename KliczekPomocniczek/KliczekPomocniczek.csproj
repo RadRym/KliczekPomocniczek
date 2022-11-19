@@ -73,6 +73,7 @@
     <Compile Include="Skills\Logger.cs" />
     <Compile Include="Skills\partCoordSyst.cs" />
     <Compile Include="Skills\ribsCuts.cs" />
+    <Compile Include="Skills\SetGlobalHotkeys.cs" />
     <Compile Include="Skills\viewClass.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

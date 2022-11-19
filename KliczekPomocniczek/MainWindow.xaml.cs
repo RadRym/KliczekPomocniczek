@@ -1,5 +1,6 @@
 ﻿using KliczekPomocniczek.QuickMenu;
 using KliczekPomocniczek.Skills;
+using System;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ namespace KliczekPomocniczek
         public static MainWindow main;
         public keyboardKeyListener listener;
         public static QuickMenuPage QuickMenuPage = new QuickMenuPage();
+        KeyboardHook hook = new KeyboardHook();
         public static System.Windows.Input.Key keyChangeWeldPosition = System.Windows.Input.Key.Space;
         #endregion
 
@@ -22,6 +24,10 @@ namespace KliczekPomocniczek
             InitializeComponent();
             main = this;
             DataContext = new comboboxes();
+            hook.KeyPressed +=
+            new EventHandler<KeyPressedEventArgs>(StartQuickMenu);
+            //hook.RegisterHotKey(ModifierKeys.Control | ModifierKeys.Alt, Keys.F12);
+            hook.RegisterHotKey(ModifierKeys.Control, Keys.Space);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -70,10 +76,11 @@ namespace KliczekPomocniczek
             Model model = new Model();
             if (e.KeyPressed == keyChangeWeldPosition &&
                 checkBox_WeldPosition.IsChecked == true)
-                changeWeldDirection.weldPositionEnum();
-
-            if (e.KeyPressed == System.Windows.Input.Key.Down &&
-                QuickMenuPage.IsActive == false)
+                changeWeldDirection.weldPositionEnum();  
+        }
+        public void StartQuickMenu(object sender, KeyPressedEventArgs e)
+        {
+            if (QuickMenuPage.IsActive == false)
             {
                 QuickMenuPage.Left = 0.8 * System.Windows.Forms.Control.MousePosition.X - 250;
                 QuickMenuPage.Top = 0.8 * System.Windows.Forms.Control.MousePosition.Y - 250;
