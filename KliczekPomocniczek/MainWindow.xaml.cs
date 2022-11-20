@@ -19,7 +19,6 @@ namespace KliczekPomocniczek
         readonly KeyboardHook hook = new KeyboardHook();
         Thread trackerThread = new Thread(Tracker);
         public static System.Windows.Input.Key keyChangeWeldPosition = System.Windows.Input.Key.Space;
-
         #endregion
 
         public MainWindow()
@@ -31,6 +30,14 @@ namespace KliczekPomocniczek
                 hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(StartQuickMenu);
                 hook.RegisterHotKey(ModifierKeys.Control, Keys.Space);
                 this.SizeToContent = SizeToContent.WidthAndHeight;
+
+                #region Settings
+                DateTime thisDay = DateTime.Today;
+                ListNameTextBox.Text = thisDay.ToString("yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture) + "_";
+                OpenListAfterCreatingCheckBox.IsChecked = Properties.Settings.Default.OpenListAfterCreating;
+                LocalizationOfFilesTextBox.Text = Properties.Settings.Default.LocalizationOfFiles;
+                LocalizationOfSavedListTextBox.Text = Properties.Settings.Default.LocalizationOfSavedList;
+                #endregion
             }
             catch
             {
@@ -106,6 +113,13 @@ namespace KliczekPomocniczek
 
         private void Window_Closed(object sender, System.EventArgs e)
         {
+            #region Settings
+            Properties.Settings.Default.OpenListAfterCreating = (bool)OpenListAfterCreatingCheckBox.IsChecked;
+            Properties.Settings.Default.LocalizationOfFiles = LocalizationOfFilesTextBox.Text;
+            Properties.Settings.Default.LocalizationOfSavedList = LocalizationOfSavedListTextBox.Text;
+            Properties.Settings.Default.Save();
+            #endregion
+
             listener.UnHookKeyboard();
             QuickMenuPage.Close();
             trackerThread.Abort();  
