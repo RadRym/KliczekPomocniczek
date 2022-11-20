@@ -16,14 +16,14 @@ namespace KliczekPomocniczek.Skills
         public static QuickMenuPage QuickMenuPage = new QuickMenuPage();
         public static void Draw()
         {
-            try
+            TSM.Model Model = new TSM.Model();
+            if (Model.GetConnectionStatus())
             {
-                Model model = new Model();
                 ModelObjectEnumerator.AutoFetch = true;
                 TSMUI.ModelObjectSelector modelSelector = new TSMUI.ModelObjectSelector();
                 TSM.ModelObjectEnumerator modelObjects = (modelSelector.GetSelectedObjects() as TSM.ModelObjectEnumerator);
 
-                TransformationPlane currentPlane = model.GetWorkPlaneHandler().GetCurrentTransformationPlane();
+                TransformationPlane currentPlane = Model.GetWorkPlaneHandler().GetCurrentTransformationPlane();
 
                 foreach (Part modelObject in modelObjects)
                 {
@@ -31,7 +31,7 @@ namespace KliczekPomocniczek.Skills
                     {
                         var drawer = new GraphicsDrawer();
                         TransformationPlane localPlane = new TransformationPlane(modelObject.GetCoordinateSystem());
-                        model.GetWorkPlaneHandler().SetCurrentTransformationPlane(localPlane);
+                        Model.GetWorkPlaneHandler().SetCurrentTransformationPlane(localPlane);
                         var location = modelObject.GetCoordinateSystem().Origin;
 
                         drawer.DrawLineSegment(location, location + new Point(100, 0, 0), new Color(1, 0, 0));
@@ -44,17 +44,15 @@ namespace KliczekPomocniczek.Skills
                     else return;
 
                 }
-                model.GetWorkPlaneHandler().SetCurrentTransformationPlane(currentPlane);
+                Model.GetWorkPlaneHandler().SetCurrentTransformationPlane(currentPlane);
             }
-            catch (Exception ex)
-            {
-                Logger.WritrLog(ex.Message);
-            }
+            else return;
         }
         
         public static void Set()
         {
-            try
+            TSM.Model Model = new TSM.Model();
+            if (Model.GetConnectionStatus())
             {
                 Operation.DisplayPrompt("Wyemancypowany typie zaznacz parta do którego chcesz się przykleić");
                 if (QuickMenuPage.IsActive == true)
@@ -67,15 +65,13 @@ namespace KliczekPomocniczek.Skills
                 model.CommitChanges();
                 ViewHandler.RedrawWorkplane();
             }
-            catch (Exception ex)
-            {
-                Logger.WritrLog(ex.Message);
-            }
+            else return;
         }
 
         public static void Redraw()
         {
-            try
+            TSM.Model Model = new TSM.Model();
+            if (Model.GetConnectionStatus())
             {
                 ModelViewEnumerator ViewEnum = ViewHandler.GetAllViews();
                 while (ViewEnum.MoveNext())
@@ -84,10 +80,7 @@ namespace KliczekPomocniczek.Skills
                     ViewHandler.RedrawView(ViewSel);
                 }
             }
-            catch (Exception ex)
-            {
-                Logger.WritrLog(ex.Message);
-            }
+            else return;
         }
     }
 }

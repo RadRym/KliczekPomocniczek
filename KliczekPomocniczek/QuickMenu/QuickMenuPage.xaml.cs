@@ -81,7 +81,6 @@ namespace KliczekPomocniczek.QuickMenu
         private void CSVfiles_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
-            //putSomeDataNieChceMiSie.Show();
         }
 
         private void Hide_Click(object sender, RoutedEventArgs e)

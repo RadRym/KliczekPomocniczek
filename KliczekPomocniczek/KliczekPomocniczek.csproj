@@ -66,11 +66,10 @@
     <Compile Include="Skills\activeWindows.cs" />
     <Compile Include="Skills\changeWeldDirection.cs" />
     <Compile Include="Skills\clipPlanes.cs" />
-    <Compile Include="Skills\comboboxes.cs" />
+    <Compile Include="Skills\Components.cs" />
     <Compile Include="Skills\CSVlist.cs" />
     <Compile Include="Skills\gridManipulation.cs" />
     <Compile Include="Skills\keyboardKeyListener.cs" />
-    <Compile Include="Skills\Logger.cs" />
     <Compile Include="Skills\partCoordSyst.cs" />
     <Compile Include="Skills\ribsCuts.cs" />
     <Compile Include="Skills\SetGlobalHotkeys.cs" />

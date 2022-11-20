@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KliczekPomocniczek"
         mc:Ignorable="d"
-        Title="Kliczek Pomocniczek" Height="350" Width="230" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing" WindowStyle="ThreeDBorderWindow" ResizeMode="CanResizeWithGrip">
+        Title="Kliczek Pomocniczek" Height="auto" Width="230" 
+        Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing" 
+        WindowStyle="ThreeDBorderWindow" ResizeMode="CanResizeWithGrip"
+        Topmost="True">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -40,33 +42,74 @@
                 Grid.Column="1" Grid.Row="4" Click="ObjectCoordynates_Click"/>
         <Button x:Name="setPartWorkPlane" Content="Set Part Work Plane"
                 Grid.Column="1" Grid.Row="5" Click="SetPartWorkPlane_Click"/>
-        <Button x:Name="Test1" Content="Test1"
-                Grid.Column="1" Grid.Row="6" Click="Test1_Click"/>
-        <Button x:Name="Test2" Content="Test2"
-                Grid.Column="1" Grid.Row="7" Click="Test2_Click"/>
-        <Button x:Name="Test3" Content="Test3" IsEnabled="False"
-                Grid.Column="1" Grid.Row="8"/>
-        <Button x:Name="Test4" Content="Test4"  IsEnabled="False"
-                Grid.Column="1" Grid.Row="9"/>
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" 
+                    Grid.Row="6"
+                    Background="#FFDDDDDD"
+                    Margin="0,10,0,10">
 
-        <TextBox x:Name="Text1" Grid.Row="10" Grid.Column="1"
-                 Grid.RowSpan="2"/>
+            <Border 
+                BorderBrush="#FF707070" 
+                BorderThickness="1">
+                <Expander Header="Create list of files:">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0"/>
+                        </Grid.RowDefinitions>
 
-        <ComboBox Name="Combo1"
-                  Grid.Column="2" 
-                  Grid.Row="6" 
-                  ItemsSource="{Binding GridCollection}"/>
+                        <Label Content="Localization of files:" 
+                           Grid.Row="0" 
+                           Margin="-3,-7,0,-10" 
+                           HorizontalAlignment="Left" 
+                           VerticalAlignment="Center"/>
 
-        <ComboBox Name="Combo2"
-                  Grid.Column="2" Grid.Row="7">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Fill="{Binding Name}"  Width="16" Height="16" />
-                        <TextBlock Text ="{Binding Name}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+                        <TextBox x:Name="LocalizationOfFilesTextBox" 
+                                 Grid.Row="1"/>
+
+                        <Label Content="Localization of saved list:" 
+                           Grid.Row="2" 
+                           Margin="-3,-5,0,-5"/>
+
+                        <TextBox x:Name="LocalizationOfSavedListTextBox" Grid.Row="3"/>
+
+                        <Label Content="List name:" 
+                           Grid.Row="4" 
+                           Margin="-3,-5,0,-5" 
+                           HorizontalAlignment="Left" 
+                           VerticalAlignment="Center"/>
+
+                        <TextBox x:Name="ListNameTextBox" Grid.Row="5"/>
+
+                        <Button x:Name="CreateListOFFiles" 
+                                Content="Generate list!"
+                                Grid.Row="6"
+                                Width="100"
+                                HorizontalAlignment="Right"
+                                Margin="0,5,0,5" Click="CreateListOFFiles_Click"/>
+                        <CheckBox
+                            x:Name="OpenListAfterCreatingCheckBox"
+                            Grid.Row="7"
+                            Content="Open list after     "
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            IsChecked="False"
+                            Margin="0,0,0,5">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="0.9" ScaleY="0.9" />
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+                    </Grid>
+                </Expander>
+            </Border>
+        </StackPanel>
+        <!--<TextBox x:Name="Text1" Grid.Row="10" Grid.Column="1"
+                 Grid.RowSpan="2" AutomationProperties.HelpText="dfssdfsdfs"/>-->
     </Grid>
 </Window>

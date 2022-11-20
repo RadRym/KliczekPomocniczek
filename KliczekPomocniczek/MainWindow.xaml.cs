@@ -3,6 +3,7 @@ using KliczekPomocniczek.Skills;
 using System;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using Tekla.Structures.Model;
 using MessageBox = System.Windows.MessageBox;
@@ -15,19 +16,26 @@ namespace KliczekPomocniczek
         public static MainWindow main;
         public keyboardKeyListener listener;
         public static QuickMenuPage QuickMenuPage = new QuickMenuPage();
-        KeyboardHook hook = new KeyboardHook();
+        readonly KeyboardHook hook = new KeyboardHook();
+        Thread trackerThread = new Thread(Tracker);
         public static System.Windows.Input.Key keyChangeWeldPosition = System.Windows.Input.Key.Space;
+
         #endregion
 
         public MainWindow()
         {
-            InitializeComponent();
-            main = this;
-            DataContext = new comboboxes();
-            hook.KeyPressed +=
-            new EventHandler<KeyPressedEventArgs>(StartQuickMenu);
-            //hook.RegisterHotKey(ModifierKeys.Control | ModifierKeys.Alt, Keys.F12);
-            hook.RegisterHotKey(ModifierKeys.Control, Keys.Space);
+            try
+            {
+                InitializeComponent();
+                main = this;
+                hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(StartQuickMenu);
+                hook.RegisterHotKey(ModifierKeys.Control, Keys.Space);
+                this.SizeToContent = SizeToContent.WidthAndHeight;
+            }
+            catch
+            {
+                MessageBox.Show("Wystąpił błąd");
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -35,49 +43,48 @@ namespace KliczekPomocniczek
             listener = new keyboardKeyListener();
             listener.OnKeyPressed += Listener_OnKeyPressed;
             listener.HookKeyboard();
-            Thread trackerThread = new Thread(tracker);
             trackerThread.Start();
         }
 
-        private void tracker()
+        private static void Tracker()
         {
-            while (true)
-            {
-                var point = Control.MousePosition;
-                int x = point.X;
-                MainWindow.main.Dispatcher.Invoke(new System.Action(delegate()
-                {
-                    Screen s = Screen.FromPoint(System.Windows.Forms.Control.MousePosition);
-                    double screenWidth = s.WorkingArea.Width;
-                    double screenHeight = s.WorkingArea.Height;
-                    MainWindow.main.Text1.Text =
-                                    "MousePositionX: " + Control.MousePosition.X.ToString() + " \n" +
-                                    "MousePositionY: " + Control.MousePosition.Y.ToString() + " \n" +
-                                    "VirtualScreenWidth: " + SystemParameters.VirtualScreenWidth.ToString() + " \n" +
-                                    "VirtualScreenHeight: " + SystemParameters.VirtualScreenHeight.ToString() + " \n" +
-                                    "PrimaryScreenWidth: " + SystemParameters.PrimaryScreenWidth.ToString() + " \n" +
-                                    "PrimaryScreenHeight: " + SystemParameters.PrimaryScreenHeight.ToString() + " \n" +
-                                    "FullPrimaryScreenWidth: " + SystemParameters.FullPrimaryScreenWidth.ToString() + " \n" +
-                                    "FullPrimaryScreenHeight: " + SystemParameters.FullPrimaryScreenHeight.ToString() + " \n" +
-                                    "screenWidth: " + screenWidth.ToString() + " \n" +
-                                    "screenHeight: " + screenHeight.ToString() + " \n" +
-                                    "QuickMenuPage.Width: " + QuickMenuPage.Width.ToString() + " \n" +
-                                    "QuickMenuPage.Height: " + QuickMenuPage.Height.ToString() + " \n" +
-                                    "QuickMenuPage.Left: " + QuickMenuPage.Left.ToString() + " \n" +
-                                    "QuickMenuPage.Top: " + QuickMenuPage.Top.ToString() + " \n" +
-                                    s.DeviceName.ToString();
-                }));
+            //while (true)
+            //{
+            //    var point = System.Windows.Forms.Control.MousePosition;
+            //    int x = point.X;
+            //    MainWindow.main.Dispatcher.Invoke(new System.Action(delegate ()
+            //    {
+            //        Screen s = Screen.FromPoint(System.Windows.Forms.Control.MousePosition);
+            //        double screenWidth = s.WorkingArea.Width;
+            //        double screenHeight = s.WorkingArea.Height;
+            //        MainWindow.main.Text1.Text =
+            //                        "MousePositionX: " + System.Windows.Forms.Control.MousePosition.X.ToString() + " \n" +
+            //                        "MousePositionY: " + System.Windows.Forms.Control.MousePosition.Y.ToString() + " \n" +
+            //                        "VirtualScreenWidth: " + SystemParameters.VirtualScreenWidth.ToString() + " \n" +
+            //                        "VirtualScreenHeight: " + SystemParameters.VirtualScreenHeight.ToString() + " \n" +
+            //                        "PrimaryScreenWidth: " + SystemParameters.PrimaryScreenWidth.ToString() + " \n" +
+            //                        "PrimaryScreenHeight: " + SystemParameters.PrimaryScreenHeight.ToString() + " \n" +
+            //                        "FullPrimaryScreenWidth: " + SystemParameters.FullPrimaryScreenWidth.ToString() + " \n" +
+            //                        "FullPrimaryScreenHeight: " + SystemParameters.FullPrimaryScreenHeight.ToString() + " \n" +
+            //                        "screenWidth: " + screenWidth.ToString() + " \n" +
+            //                        "screenHeight: " + screenHeight.ToString() + " \n" +
+            //                        "QuickMenuPage.Width: " + QuickMenuPage.Width.ToString() + " \n" +
+            //                        "QuickMenuPage.Height: " + QuickMenuPage.Height.ToString() + " \n" +
+            //                        "QuickMenuPage.Left: " + QuickMenuPage.Left.ToString() + " \n" +
+            //                        "QuickMenuPage.Top: " + QuickMenuPage.Top.ToString() + " \n" +
+            //                        s.DeviceName.ToString();
+            //    }));
 
-            }
+            //}
         }
 
         public void Listener_OnKeyPressed(object sender, KeyPressedArgs e)
         {
-            Model model = new Model();
             if (e.KeyPressed == keyChangeWeldPosition &&
                 checkBox_WeldPosition.IsChecked == true)
                 changeWeldDirection.weldPositionEnum();  
         }
+
         public void StartQuickMenu(object sender, KeyPressedEventArgs e)
         {
             if (QuickMenuPage.IsActive == false)
@@ -97,20 +104,11 @@ namespace KliczekPomocniczek
 
         private void SetPartWorkPlane_Click(object sender, RoutedEventArgs e) => partCoordSyst.Set();
 
-        private void Test1_Click(object sender, RoutedEventArgs e)
-        {
-            var gridXLabels = gridManipulation.nameLabel()[0];
-        }
-
-        private void Test2_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(activeWindows.ActiveWindowTitle());
-        }
-
         private void Window_Closed(object sender, System.EventArgs e)
         {
             listener.UnHookKeyboard();
             QuickMenuPage.Close();
+            trackerThread.Abort();  
             System.Windows.Application.Current.Shutdown();
         }
 
@@ -128,6 +126,13 @@ namespace KliczekPomocniczek
             }
         }
 
-        
+        public void CreateListOFFiles_Click(object sender, RoutedEventArgs e)
+        {
+            bool OpenListAfterCreating = (bool)OpenListAfterCreatingCheckBox.IsChecked;
+            string LocalizationOfFiles = LocalizationOfFilesTextBox.Text;
+            string LocalizationOfSavedList = LocalizationOfSavedListTextBox.Text;
+            string ListName = ListNameTextBox.Text;
+            CSVlist.filesToCSV(LocalizationOfFiles, LocalizationOfSavedList, ListName, OpenListAfterCreating);
+        }
     }
 }

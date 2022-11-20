@@ -10,13 +10,13 @@ using Tekla.Structures.Model;
 
 namespace KliczekPomocniczek.Skills
 {
-    internal class gridManipulation
+    internal class GridManipulation
     {
-        public static List<string> nameLabel()
+        public static List<string> NameLabel()
         {
-            try
+            TSM.Model Model = new TSM.Model();
+            if (Model.GetConnectionStatus())
             {
-                TSM.Model Model = new TSM.Model();
                 System.Type[] types = new System.Type[1];
                 types.SetValue(typeof(Grid), 0);
                 List<string> strings = new List<string>();
@@ -29,21 +29,18 @@ namespace KliczekPomocniczek.Skills
                 }
                 return strings;
             }
-            catch (Exception ex)
-            {
-                Logger.WritrLog(ex.Message);
-                return null;
-            }
+            else return null;
         }
         
         public static List<string> LabelsGrid()
         {
-            try
+            TSM.Model Model = new TSM.Model();
+            if (Model.GetConnectionStatus())
             {
                 List<string> LabelsGrid = new List<string>();
-                for (int k = 0; k < gridManipulation.nameLabel().Count(); k++)
+                for (int k = 0; k < GridManipulation.NameLabel().Count(); k++)
                 {
-                    string stringNameLabel = gridManipulation.nameLabel()[k];
+                    string stringNameLabel = GridManipulation.NameLabel()[k];
                     string[] strings = stringNameLabel.Split(' ');
                     for (int i = 0; i < strings.Length; i++)
                     {
@@ -52,11 +49,7 @@ namespace KliczekPomocniczek.Skills
                 }
                 return LabelsGrid;
             }
-            catch (Exception ex)
-            {
-                Logger.WritrLog(ex.Message);
-                return null;
-            }
+            else return null;
         }
     }
 }

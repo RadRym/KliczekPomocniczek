@@ -3,6 +3,9 @@ using TSMUI = Tekla.Structures.Model.UI;
 using TSMW = Tekla.Structures.Model.Weld.WeldPositionEnum;
 using Tekla.Structures.Model;
 using System;
+using Tekla.Structures.ModelInternal;
+using static Tekla.Structures.Model.Weld;
+using System.Windows;
 
 namespace KliczekPomocniczek.Skills
 {
@@ -10,9 +13,9 @@ namespace KliczekPomocniczek.Skills
     {
         public static void weldPositionEnum()
         {
-            try
+            TSM.Model Model = new TSM.Model();
+            if (Model.GetConnectionStatus())
             {
-                TSM.Model Model = new TSM.Model();
                 if (activeWindows.isActive("TeklaStructures"))
                 {
                     TSMUI.ModelObjectSelector modelSelector = new TSMUI.ModelObjectSelector();
@@ -20,7 +23,7 @@ namespace KliczekPomocniczek.Skills
 
                     while (selectedObjects.MoveNext())
                     {
-                        if(selectedObjects.Current is Weld)
+                        if (selectedObjects.Current is Weld)
                         {
                             var weld = selectedObjects.Current as TSM.Weld;
                             TSM.Weld.WeldPositionEnum weldPositionEnum = weld.Position;
@@ -42,19 +45,16 @@ namespace KliczekPomocniczek.Skills
                             weld.Modify();
                         }
                     }
-                    Model.CommitChanges();
                 }
+                Model.CommitChanges();
             }
-            catch (Exception ex)
-            {
-                Logger.WritrLog(ex.Message);
-            }
+            else return;
         }
         public static bool isWeldSelected()
         {
-            try
+            TSM.Model Model = new TSM.Model();
+            if (Model.GetConnectionStatus())
             {
-                TSM.Model Model = new TSM.Model();
                 TSMUI.ModelObjectSelector modelSelector = new TSMUI.ModelObjectSelector();
                 TSM.ModelObjectEnumerator selectedObjects = (modelSelector.GetSelectedObjects() as TSM.ModelObjectEnumerator);
 
@@ -70,11 +70,7 @@ namespace KliczekPomocniczek.Skills
                     return false;
                 else return true;
             }
-            catch (Exception ex)
-            {
-                Logger.WritrLog(ex.Message);
-                return false;
-            }
+            else return false;
         }
     }
 }

@@ -19,10 +19,10 @@ namespace KliczekPomocniczek.Skills
 
         public static void createClipPlanes()
         {
-            try
+            TSM.Model Model = new TSM.Model();
+            if(Model.GetConnectionStatus())
             {
                 deleteClipPlanes();
-                TSM.Model Model = new TSM.Model();
                 TSMUI.ModelObjectSelector modelSelector = new TSMUI.ModelObjectSelector();
                 TSM.ModelObjectEnumerator selectedObjects = (modelSelector.GetSelectedObjects() as TSM.ModelObjectEnumerator);
 
@@ -113,15 +113,13 @@ namespace KliczekPomocniczek.Skills
                     Operation.DisplayPrompt("Clip planes created. Pozdro 600");
                 }
             }
-            catch (Exception ex)
-            {
-                Logger.WritrLog(ex.Message);
-            }
+            else return;
         }
 
         public static void deleteClipPlanes()
         {
-            try
+            TSM.Model Model = new TSM.Model();
+            if (Model.GetConnectionStatus())
             {
                 ModelViewEnumerator ViewEnum = ViewHandler.GetVisibleViews();
                 ViewEnum.MoveNext();
@@ -138,10 +136,7 @@ namespace KliczekPomocniczek.Skills
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Logger.WritrLog(ex.Message);
-            }
+            else return;
         }
     }
 }

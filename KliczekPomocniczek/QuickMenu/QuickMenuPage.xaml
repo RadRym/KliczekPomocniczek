@@ -51,7 +51,7 @@
             <Image Source="/Icons/FileToCSV.png" Height="40" Width="40"/>
         </local:ButtonClass>
         
-        <local:ButtonClass x:Name="Hide"
+        <local:ButtonClass x:Name="HideQuickMenu"
                            Click="Hide_Click"
                            Margin="0, 0, 0, 0"
                            Style="{StaticResource QuickMenuButton}" >
