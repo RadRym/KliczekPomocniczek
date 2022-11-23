@@ -3,9 +3,8 @@ using KliczekPomocniczek.Skills;
 using System;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
-using Tekla.Structures.Model;
+using Tekla.Structures;
 using MessageBox = System.Windows.MessageBox;
 
 namespace KliczekPomocniczek
@@ -81,7 +80,6 @@ namespace KliczekPomocniczek
             //                        "QuickMenuPage.Top: " + QuickMenuPage.Top.ToString() + " \n" +
             //                        s.DeviceName.ToString();
             //    }));
-
             //}
         }
 
@@ -92,24 +90,23 @@ namespace KliczekPomocniczek
                 changeWeldDirection.weldPositionEnum();  
         }
 
-        public void StartQuickMenu(object sender, KeyPressedEventArgs e)
-        {
-            if (QuickMenuPage.IsActive == false)
-            {
-                QuickMenuPage.Left = 0.8 * System.Windows.Forms.Control.MousePosition.X - 250;
-                QuickMenuPage.Top = 0.8 * System.Windows.Forms.Control.MousePosition.Y - 250;
-                QuickMenuPage.Topmost = true;
-                QuickMenuPage.Show();
-            }
-        }
+        public void StartQuickMenu(object sender, KeyPressedEventArgs e) => activeWindows.RunQuickMenu(QuickMenuPage);
 
         private void DeleteClipPlanes_Click(object sender, RoutedEventArgs e) => clipPlanes.deleteClipPlanes();
 
         private void CreateClipPlanes_Click(object sender, RoutedEventArgs e) => clipPlanes.createClipPlanes();
 
-        private void ObjectCoordynates_Click(object sender, RoutedEventArgs e) => partCoordSyst.Draw();
+        private void ConceptToDetailed_Click(object sender, RoutedEventArgs e)
+        {
+            var macroBuilder = new MacroBuilder();
+            macroBuilder.Callback("acmdChangeJointTypeToCallback", "CONCEPTUAL", "View_01 window_1");
+        }
 
-        private void SetPartWorkPlane_Click(object sender, RoutedEventArgs e) => partCoordSyst.Set();
+        private void DetailedToConcept_Click(object sender, RoutedEventArgs e)
+        {
+            var macroBuilder = new MacroBuilder();
+            macroBuilder.Callback("acmdChangeJointTypeToCallback", "DETAIL", "View_01 window_1");
+        }
 
         private void Window_Closed(object sender, System.EventArgs e)
         {

@@ -50,6 +50,34 @@
             "related": ".xml"
           }
         }
+      },
+      "TeklaOpenAPI/2021.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/Tekla.Application.Library.dll": {},
+          "lib/Tekla.Structures.Analysis.dll": {},
+          "lib/Tekla.Structures.Catalogs.dll": {},
+          "lib/Tekla.Structures.Datatype.dll": {},
+          "lib/Tekla.Structures.Dialog.dll": {},
+          "lib/Tekla.Structures.Drawing.dll": {},
+          "lib/Tekla.Structures.Model.dll": {},
+          "lib/Tekla.Structures.Plugins.dll": {},
+          "lib/Tekla.Structures.dll": {}
+        },
+        "runtime": {
+          "lib/Tekla.Application.Library.dll": {},
+          "lib/Tekla.Structures.Analysis.dll": {},
+          "lib/Tekla.Structures.Catalogs.dll": {},
+          "lib/Tekla.Structures.Datatype.dll": {},
+          "lib/Tekla.Structures.Dialog.dll": {},
+          "lib/Tekla.Structures.Drawing.dll": {},
+          "lib/Tekla.Structures.Model.dll": {},
+          "lib/Tekla.Structures.Plugins.dll": {},
+          "lib/Tekla.Structures.dll": {}
+        },
+        "build": {
+          "build/TeklaOpenAPI.props": {}
+        }
       }
     },
     ".NETFramework,Version=v4.8/win": {
@@ -100,6 +128,34 @@
           "lib/net40/Tekla.Structures.Model.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "TeklaOpenAPI/2021.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/Tekla.Application.Library.dll": {},
+          "lib/Tekla.Structures.Analysis.dll": {},
+          "lib/Tekla.Structures.Catalogs.dll": {},
+          "lib/Tekla.Structures.Datatype.dll": {},
+          "lib/Tekla.Structures.Dialog.dll": {},
+          "lib/Tekla.Structures.Drawing.dll": {},
+          "lib/Tekla.Structures.Model.dll": {},
+          "lib/Tekla.Structures.Plugins.dll": {},
+          "lib/Tekla.Structures.dll": {}
+        },
+        "runtime": {
+          "lib/Tekla.Application.Library.dll": {},
+          "lib/Tekla.Structures.Analysis.dll": {},
+          "lib/Tekla.Structures.Catalogs.dll": {},
+          "lib/Tekla.Structures.Datatype.dll": {},
+          "lib/Tekla.Structures.Dialog.dll": {},
+          "lib/Tekla.Structures.Drawing.dll": {},
+          "lib/Tekla.Structures.Model.dll": {},
+          "lib/Tekla.Structures.Plugins.dll": {},
+          "lib/Tekla.Structures.dll": {}
+        },
+        "build": {
+          "build/TeklaOpenAPI.props": {}
         }
       }
     },
@@ -152,6 +208,34 @@
             "related": ".xml"
           }
         }
+      },
+      "TeklaOpenAPI/2021.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/Tekla.Application.Library.dll": {},
+          "lib/Tekla.Structures.Analysis.dll": {},
+          "lib/Tekla.Structures.Catalogs.dll": {},
+          "lib/Tekla.Structures.Datatype.dll": {},
+          "lib/Tekla.Structures.Dialog.dll": {},
+          "lib/Tekla.Structures.Drawing.dll": {},
+          "lib/Tekla.Structures.Model.dll": {},
+          "lib/Tekla.Structures.Plugins.dll": {},
+          "lib/Tekla.Structures.dll": {}
+        },
+        "runtime": {
+          "lib/Tekla.Application.Library.dll": {},
+          "lib/Tekla.Structures.Analysis.dll": {},
+          "lib/Tekla.Structures.Catalogs.dll": {},
+          "lib/Tekla.Structures.Datatype.dll": {},
+          "lib/Tekla.Structures.Dialog.dll": {},
+          "lib/Tekla.Structures.Drawing.dll": {},
+          "lib/Tekla.Structures.Model.dll": {},
+          "lib/Tekla.Structures.Plugins.dll": {},
+          "lib/Tekla.Structures.dll": {}
+        },
+        "build": {
+          "build/TeklaOpenAPI.props": {}
+        }
       }
     },
     ".NETFramework,Version=v4.8/win-x86": {
@@ -203,6 +287,34 @@
             "related": ".xml"
           }
         }
+      },
+      "TeklaOpenAPI/2021.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/Tekla.Application.Library.dll": {},
+          "lib/Tekla.Structures.Analysis.dll": {},
+          "lib/Tekla.Structures.Catalogs.dll": {},
+          "lib/Tekla.Structures.Datatype.dll": {},
+          "lib/Tekla.Structures.Dialog.dll": {},
+          "lib/Tekla.Structures.Drawing.dll": {},
+          "lib/Tekla.Structures.Model.dll": {},
+          "lib/Tekla.Structures.Plugins.dll": {},
+          "lib/Tekla.Structures.dll": {}
+        },
+        "runtime": {
+          "lib/Tekla.Application.Library.dll": {},
+          "lib/Tekla.Structures.Analysis.dll": {},
+          "lib/Tekla.Structures.Catalogs.dll": {},
+          "lib/Tekla.Structures.Datatype.dll": {},
+          "lib/Tekla.Structures.Dialog.dll": {},
+          "lib/Tekla.Structures.Drawing.dll": {},
+          "lib/Tekla.Structures.Model.dll": {},
+          "lib/Tekla.Structures.Plugins.dll": {},
+          "lib/Tekla.Structures.dll": {}
+        },
+        "build": {
+          "build/TeklaOpenAPI.props": {}
+        }
       }
     }
   },
@@ -251,12 +363,55 @@
         "tekla.structures.model.2021.0.0.nupkg.sha512",
         "tekla.structures.model.nuspec"
       ]
+    },
+    "TeklaOpenAPI/2021.0.1": {
+      "sha512": "U5ntsgROvHgtGk1wX06WiEkXoUiyFL6EvuadWE3zsu5BKq1C5VmCg1qazlESCRTYY2CTKGebRw20+k9h0D2afg==",
+      "type": "package",
+      "path": "teklaopenapi/2021.0.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "TeklaStructuresExtension.ico",
+        "build/TeklaOpenAPI.props",
+        "eula.txt",
+        "lib/Akit5.dll",
+        "lib/Ionic.Zip.dll",
+        "lib/Mono.Cecil.dll",
+        "lib/Tekla.Application.Library.dll",
+        "lib/Tekla.Application.Library.pdb",
+        "lib/Tekla.Structures.Analysis.dll",
+        "lib/Tekla.Structures.Analysis.pdb",
+        "lib/Tekla.Structures.Catalogs.dll",
+        "lib/Tekla.Structures.Catalogs.pdb",
+        "lib/Tekla.Structures.Datatype.dll",
+        "lib/Tekla.Structures.Datatype.pdb",
+        "lib/Tekla.Structures.Dialog.dll",
+        "lib/Tekla.Structures.Dialog.pdb",
+        "lib/Tekla.Structures.Drawing.dll",
+        "lib/Tekla.Structures.Drawing.pdb",
+        "lib/Tekla.Structures.Model.dll",
+        "lib/Tekla.Structures.Model.pdb",
+        "lib/Tekla.Structures.Plugins.dll",
+        "lib/Tekla.Structures.Plugins.pdb",
+        "lib/Tekla.Structures.dll",
+        "lib/Tekla.Structures.pdb",
+        "lib/Tekla.Technology.MsgLib.dll",
+        "lib/Tekla.Technology.Scripting.Plugins.dll",
+        "lib/Tekla.Technology.Scripting.dll",
+        "lib/Tekla.Technology.Serialization.dll",
+        "logo.png",
+        "teklaopenapi.2021.0.1.nupkg.sha512",
+        "teklaopenapi.nuspec",
+        "tools/install.ps1"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
       "Tekla.Structures >= 2021.0.0",
-      "Tekla.Structures.Model >= 2021.0.0"
+      "Tekla.Structures.Model >= 2021.0.0",
+      "TeklaOpenAPI >= 2021.0.1"
     ]
   },
   "packageFolders": {
@@ -304,6 +459,10 @@
           "Tekla.Structures.Model": {
             "target": "Package",
             "version": "[2021.0.0, )"
+          },
+          "TeklaOpenAPI": {
+            "target": "Package",
+            "version": "[2021.0.1, )"
           }
         }
       }

@@ -10,10 +10,11 @@ using System.Linq;
 using Operation = Tekla.Structures.Model.Operations.Operation;
 using Part = Tekla.Structures.Model.Part;
 using System;
+using Tekla.Structures;
 
 namespace KliczekPomocniczek.Skills
 {
-    internal class Components
+    public class Components
     {
         public static List<Component> selectedComponents()
         {
@@ -59,14 +60,21 @@ namespace KliczekPomocniczek.Skills
             return selectedDetailedComponents;
         }
 
+
         public static void ConceptualToDetailed(List<Component> selectedConceptualComponents)
         {
-
+            var macroBuilder = new MacroBuilder();
+            foreach(Component component in selectedConceptualComponents)
+            {
+                component.Select();
+                macroBuilder.Callback("acmdChangeJointTypeToCallback", "DETAIL", "View_01 window_1");
+            }
         }
 
         public static void DetailedToConceptual(List<Component> selectedDetailedComponents)
         {
-
+            var macroBuilder = new MacroBuilder();
+            macroBuilder.Callback("acmdChangeJointTypeToCallback", "CONCEPTUAL", "View_01 window_1");
         }
     }
 }

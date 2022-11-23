@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Kliczek Pomocniczek" Height="auto" Width="230" 
         Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing" 
-        WindowStyle="ThreeDBorderWindow" ResizeMode="CanResizeWithGrip"
+        WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize"
         Topmost="True">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,6 +28,12 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
@@ -38,14 +44,13 @@
                 Grid.Column="1" Grid.Row="2" Click="DeleteClipPlanes_Click"/>
         <Button x:Name="createClipPlanes" Content="Create Clip Planes"
                 Grid.Column="1" Grid.Row="3" Click="CreateClipPlanes_Click"/>
-        <Button x:Name="objectCoordynates" Content="Object Coordynates"
-                Grid.Column="1" Grid.Row="4" Click="ObjectCoordynates_Click"/>
-        <Button x:Name="setPartWorkPlane" Content="Set Part Work Plane"
-                Grid.Column="1" Grid.Row="5" Click="SetPartWorkPlane_Click"/>
+        <Button x:Name="ConceptToDetailed" Content="Concept To Detailed"
+                Grid.Column="1" Grid.Row="4" Click="ConceptToDetailed_Click"/>
+        <Button x:Name="DetailedToConcept" Content="Detailed To Concept"
+                Grid.Column="1" Grid.Row="5" Click="DetailedToConcept_Click"/>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="2" 
                     Grid.Row="6"
-                    Background="#FFDDDDDD"
-                    Margin="0,10,0,10">
+                    Background="#FFF3F3F3">
 
             <Border 
                 BorderBrush="#FF707070" 
@@ -108,7 +113,124 @@
                 </Expander>
             </Border>
         </StackPanel>
-        <!--<TextBox x:Name="Text1" Grid.Row="10" Grid.Column="1"
-                 Grid.RowSpan="2" AutomationProperties.HelpText="dfssdfsdfs"/>-->
+
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" 
+                    Grid.Row="7"
+                    Background="#FFF3F3F3">
+
+            <Border 
+                BorderBrush="#FF707070" 
+                BorderThickness="1">
+                <Expander Header="View details:">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            x:Name="LoadSavedViewSettings"/>
+                        <CheckBox
+                            x:Name="Points_CheckBox"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Content="Points"/>
+                        <CheckBox
+                            x:Name="Lines_CheckBox"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Content="Lines"/>
+                        <CheckBox
+                            x:Name="Bolts_CheckBox"
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Content="Bolts" IsThreeState="True"/>
+                        <CheckBox
+                            x:Name="Welds_CheckBox"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Content="Welds" IsThreeState="True"/>
+                        <CheckBox
+                            x:Name="Cuts_CheckBox"
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Content="Cuts" IsThreeState="True"/>
+                        <CheckBox
+                            x:Name="Components_CheckBox"
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Content="Components" IsThreeState="True"/>
+                        <CheckBox
+                            x:Name="Grids_CheckBox"
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Content="Grids" IsThreeState="True"/>
+                        <CheckBox
+                            x:Name="References_CheckBox"
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Content="References" IsThreeState="True"/>
+                        <Label                            
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Content="Visible object group:"
+                            Margin="-3,-5,0,-3" />
+                        <TextBox
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            x:Name="Phases"/>
+                        <Label                            
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Content="Color and transparency:"
+                            Margin="-3,-5,0,-3" />
+                        <ComboBox
+                            Grid.Row="8"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            x:Name="ColorAndTransparency"/>
+                        <Button
+                            Grid.Row="9"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            x:Name="CommitChangesInView"
+                            Content="Commit changes!"
+                            Margin="0,5,0,5"/>
+                        <Label                            
+                            Grid.Row="10"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Content="Save settings as:"
+                            Margin="-3,-5,0,-3" />
+                        <TextBox
+                            Grid.Row="11"
+                            Grid.Column="0"
+                             Grid.ColumnSpan="2"
+                            x:Name="SaveAsView"/>
+                    </Grid>
+                </Expander>
+            </Border>
+        </StackPanel>
     </Grid>
 </Window>
