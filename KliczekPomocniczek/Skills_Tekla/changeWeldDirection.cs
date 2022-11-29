@@ -16,7 +16,7 @@ namespace KliczekPomocniczek.Skills
             TSM.Model Model = new TSM.Model();
             if (Model.GetConnectionStatus())
             {
-                if (activeWindows.isActive("TeklaStructures"))
+                if (ScreenOptions.isActive("TeklaStructures"))
                 {
                     TSMUI.ModelObjectSelector modelSelector = new TSMUI.ModelObjectSelector();
                     TSM.ModelObjectEnumerator selectedObjects = (modelSelector.GetSelectedObjects() as TSM.ModelObjectEnumerator);

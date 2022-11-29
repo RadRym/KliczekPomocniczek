@@ -1,11 +1,17 @@
 ﻿using KliczekPomocniczek.QuickMenu;
 using KliczekPomocniczek.Skills;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using Tekla.Structures;
-using MessageBox = System.Windows.MessageBox;
+using Tekla.Structures.Dialog;
+using Tekla.Structures.Model;
+using Tekla.Structures.Model.UI;
+using View = Tekla.Structures.Model.UI.View;
 
 namespace KliczekPomocniczek
 {
@@ -13,7 +19,7 @@ namespace KliczekPomocniczek
     {
         #region Definitions
         public static MainWindow main;
-        public keyboardKeyListener listener;
+        public KeyboardKeyListener listener;
         public static QuickMenuPage QuickMenuPage = new QuickMenuPage();
         readonly KeyboardHook hook = new KeyboardHook();
         Thread trackerThread = new Thread(Tracker);
@@ -22,31 +28,35 @@ namespace KliczekPomocniczek
 
         public MainWindow()
         {
-            try
-            {
-                InitializeComponent();
-                main = this;
-                hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(StartQuickMenu);
-                hook.RegisterHotKey(ModifierKeys.Control, Keys.Space);
-                this.SizeToContent = SizeToContent.WidthAndHeight;
+            InitializeComponent();
+            main = this;
+            hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(StartQuickMenu);
+            hook.RegisterHotKey(ModifierKeys.Control, Keys.Space);
+            this.SizeToContent = SizeToContent.WidthAndHeight;
 
-                #region Settings
-                DateTime thisDay = DateTime.Today;
-                ListNameTextBox.Text = thisDay.ToString("yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture) + "_";
-                OpenListAfterCreatingCheckBox.IsChecked = Properties.Settings.Default.OpenListAfterCreating;
-                LocalizationOfFilesTextBox.Text = Properties.Settings.Default.LocalizationOfFiles;
-                LocalizationOfSavedListTextBox.Text = Properties.Settings.Default.LocalizationOfSavedList;
-                #endregion
-            }
-            catch
-            {
-                MessageBox.Show("Wystąpił błąd");
-            }
+            #region Settings
+            DateTime thisDay = DateTime.Today;
+            ListNameTextBox.Text = thisDay.ToString("yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture) + "_";
+            OpenListAfterCreatingCheckBox.IsChecked = Properties.Settings.Default.OpenListAfterCreating;
+            LocalizationOfFilesTextBox.Text = Properties.Settings.Default.LocalizationOfFiles;
+            LocalizationOfSavedListTextBox.Text = Properties.Settings.Default.LocalizationOfSavedList;
+            Model model = new Model();
+            if(model.GetConnectionStatus())
+                SaveAsView.Text = cutNameOfProject(model);
+
+            SettingsSave.Load(this, model, SettingsSave.ReadHashtable());
+            ColorAndTransparency.ItemsSource = ViewDetails.permamentVisualisation();
+            #endregion
+        }
+        public static string cutNameOfProject(Model model)
+        {
+            string cutNameOfProject = model.GetInfo().ModelName.ToString().Remove(model.GetInfo().ModelName.ToString().Length - 4);
+            return cutNameOfProject;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            listener = new keyboardKeyListener();
+            listener = new KeyboardKeyListener();
             listener.OnKeyPressed += Listener_OnKeyPressed;
             listener.HookKeyboard();
             trackerThread.Start();
@@ -90,7 +100,7 @@ namespace KliczekPomocniczek
                 changeWeldDirection.weldPositionEnum();  
         }
 
-        public void StartQuickMenu(object sender, KeyPressedEventArgs e) => activeWindows.RunQuickMenu(QuickMenuPage);
+        public void StartQuickMenu(object sender, KeyPressedEventArgs e) => ScreenOptions.RunQuickMenu(QuickMenuPage);
 
         private void DeleteClipPlanes_Click(object sender, RoutedEventArgs e) => clipPlanes.deleteClipPlanes();
 
@@ -98,14 +108,33 @@ namespace KliczekPomocniczek
 
         private void ConceptToDetailed_Click(object sender, RoutedEventArgs e)
         {
-            var macroBuilder = new MacroBuilder();
-            macroBuilder.Callback("acmdChangeJointTypeToCallback", "CONCEPTUAL", "View_01 window_1");
+            ViewVisibilitySettings viewVisibilitySettings = new ViewVisibilitySettings();
+            View view = new View();
+            ModelViewEnumerator ViewEnum = ViewHandler.GetAllViews();
+            while (ViewEnum.MoveNext())
+            {
+                view = ViewEnum.Current;
+                viewVisibilitySettings.GridsVisible = false;
+                view.VisibilitySettings = viewVisibilitySettings;
+                view.Modify();
+            }
         }
 
         private void DetailedToConcept_Click(object sender, RoutedEventArgs e)
         {
             var macroBuilder = new MacroBuilder();
             macroBuilder.Callback("acmdChangeJointTypeToCallback", "DETAIL", "View_01 window_1");
+        }
+
+        public void CommitChangesInView_Click(object sender, RoutedEventArgs e) => ViewDetails.Run(this);
+
+        public void CreateListOFFiles_Click(object sender, RoutedEventArgs e)
+        {
+            bool OpenListAfterCreating = (bool)OpenListAfterCreatingCheckBox.IsChecked;
+            string LocalizationOfFiles = LocalizationOfFilesTextBox.Text;
+            string LocalizationOfSavedList = LocalizationOfSavedListTextBox.Text;
+            string ListName = ListNameTextBox.Text;
+            CSVlist.filesToCSV(LocalizationOfFiles, LocalizationOfSavedList, ListName, OpenListAfterCreating);
         }
 
         private void Window_Closed(object sender, System.EventArgs e)
@@ -137,13 +166,30 @@ namespace KliczekPomocniczek
             }
         }
 
-        public void CreateListOFFiles_Click(object sender, RoutedEventArgs e)
+        private void SaveDisplaySettings_Click(object sender, RoutedEventArgs e)
         {
-            bool OpenListAfterCreating = (bool)OpenListAfterCreatingCheckBox.IsChecked;
-            string LocalizationOfFiles = LocalizationOfFilesTextBox.Text;
-            string LocalizationOfSavedList = LocalizationOfSavedListTextBox.Text;
-            string ListName = ListNameTextBox.Text;
-            CSVlist.filesToCSV(LocalizationOfFiles, LocalizationOfSavedList, ListName, OpenListAfterCreating);
+            Model model = new Model();
+            Hashtable hashtable  = SettingsSave.ReadHashtable();
+            SettingsSave.assembeSetings(model, this, hashtable);
+            SettingsSave.Save(hashtable);
+            SettingsSave.Load(this, model, hashtable);
+        }
+
+        private void LoadSavedViewSettings_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Model model = new Model();
+            string modelName = cutNameOfProject(model);
+            string SelectedSetting = LoadSavedViewSettings.SelectedItem.ToString();
+            Hashtable hashtablele = SettingsSave.ReadHashtable();
+
+            Points_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "PointsCheckBox")].ToString());
+            Lines_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "LinesCheckBox")].ToString());
+            Bolts_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "BoltsCheckBox")].ToString());
+            Welds_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "WeldsCheckBox")].ToString());
+            Cuts_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "CutsCheckBox")].ToString());
+            Grids_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "GridsCheckBox")].ToString());
+            References_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "ReferencesCheckBox")].ToString());
+            Components_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "ComponentsCheckBox")].ToString());
         }
     }
 }

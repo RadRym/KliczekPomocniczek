@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace KliczekPomocniczek.Skills
 {
-    public class activeWindows
+    public class ScreenOptions
     {
         [DllImport("user32.dll")]
         static extern IntPtr GetForegroundWindow();
@@ -84,7 +84,6 @@ namespace KliczekPomocniczek.Skills
                     QuickMenuPage.Topmost = true;
                     QuickMenuPage.Show();
                 }
-
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Security.Permissions;
 
 namespace KliczekPomocniczek.Skills
 {
-    public class keyboardKeyListener
+    public class KeyboardKeyListener
     {
         private const int WH_KEYBOARD_LL = 13;
         private const int WM_KEYDOWN = 0x0100;
@@ -36,7 +36,7 @@ namespace KliczekPomocniczek.Skills
         private LowLevelKeyboardProc _proc;
         private IntPtr _hookID = IntPtr.Zero;
 
-        public keyboardKeyListener()
+        public KeyboardKeyListener()
         {
             _proc = HookCallback;
         }

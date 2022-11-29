@@ -147,12 +147,16 @@
                             Grid.Row="0"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
-                            x:Name="LoadSavedViewSettings"/>
+                            x:Name="LoadSavedViewSettings" 
+                            IsReadOnly="True" 
+                            SelectionChanged="LoadSavedViewSettings_SelectionChanged"
+                            />
                         <CheckBox
                             x:Name="Points_CheckBox"
                             Grid.Row="1"
                             Grid.Column="0"
-                            Content="Points"/>
+                            Content="Points"
+                            />
                         <CheckBox
                             x:Name="Lines_CheckBox"
                             Grid.Row="1"
@@ -162,32 +166,32 @@
                             x:Name="Bolts_CheckBox"
                             Grid.Row="2"
                             Grid.Column="0"
-                            Content="Bolts" IsThreeState="True"/>
+                            Content="Bolts"/>
                         <CheckBox
                             x:Name="Welds_CheckBox"
                             Grid.Row="2"
                             Grid.Column="1"
-                            Content="Welds" IsThreeState="True"/>
+                            Content="Welds"/>
                         <CheckBox
                             x:Name="Cuts_CheckBox"
                             Grid.Row="3"
                             Grid.Column="0"
-                            Content="Cuts" IsThreeState="True"/>
+                            Content="Cuts"/>
                         <CheckBox
                             x:Name="Components_CheckBox"
                             Grid.Row="3"
                             Grid.Column="1"
-                            Content="Components" IsThreeState="True"/>
+                            Content="Components"/>
                         <CheckBox
                             x:Name="Grids_CheckBox"
                             Grid.Row="4"
                             Grid.Column="0"
-                            Content="Grids" IsThreeState="True"/>
+                            Content="Grids"/>
                         <CheckBox
                             x:Name="References_CheckBox"
                             Grid.Row="4"
                             Grid.Column="1"
-                            Content="References" IsThreeState="True"/>
+                            Content="References"/>
                         <Label                            
                             Grid.Row="5"
                             Grid.Column="0"
@@ -216,13 +220,18 @@
                             Grid.ColumnSpan="2"
                             x:Name="CommitChangesInView"
                             Content="Commit changes!"
-                            Margin="0,5,0,5"/>
+                            Margin="0,5,0,5" Click="CommitChangesInView_Click"/>
                         <Label                            
                             Grid.Row="10"
                             Grid.Column="0"
-                            Grid.ColumnSpan="2"
                             Content="Save settings as:"
                             Margin="-3,-5,0,-3" />
+                        <Button
+                            Grid.Row="10"
+                            Grid.Column="1"
+                            x:Name="SaveDisplaySettings"
+                            Content="Save"
+                            Margin="0,0,0,0" Click="SaveDisplaySettings_Click"/>
                         <TextBox
                             Grid.Row="11"
                             Grid.Column="0"
@@ -232,5 +241,7 @@
                 </Expander>
             </Border>
         </StackPanel>
+        <TextBox x:Name="TextBoxTest" Grid.Column="1" Grid.ColumnSpan="2" 
+                    Grid.Row="8"/>
     </Grid>
 </Window>
