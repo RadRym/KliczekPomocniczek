@@ -9,9 +9,11 @@ using System.Windows;
 using System.Windows.Forms;
 using Tekla.Structures;
 using Tekla.Structures.Dialog;
+using Tekla.Structures.Dialog.UIControls;
 using Tekla.Structures.Model;
 using Tekla.Structures.Model.UI;
 using View = Tekla.Structures.Model.UI.View;
+
 
 namespace KliczekPomocniczek
 {
@@ -41,11 +43,11 @@ namespace KliczekPomocniczek
             LocalizationOfFilesTextBox.Text = Properties.Settings.Default.LocalizationOfFiles;
             LocalizationOfSavedListTextBox.Text = Properties.Settings.Default.LocalizationOfSavedList;
             Model model = new Model();
-            if(model.GetConnectionStatus())
-                SaveAsView.Text = cutNameOfProject(model);
-
             SettingsSave.Load(this, model, SettingsSave.ReadHashtable());
-            ColorAndTransparency.ItemsSource = ViewDetails.permamentVisualisation();
+            ModelInfo modelInfo = model.GetInfo();
+
+            TeklaStructuresFiles files = new TeklaStructuresFiles(modelpath: modelInfo.ModelPath);
+            ColorAndTransparency.ItemsSource = files.GetMultiDirectoryFileList("rep", false);
             #endregion
         }
         public static string cutNameOfProject(Model model)
@@ -105,19 +107,12 @@ namespace KliczekPomocniczek
         private void DeleteClipPlanes_Click(object sender, RoutedEventArgs e) => clipPlanes.deleteClipPlanes();
 
         private void CreateClipPlanes_Click(object sender, RoutedEventArgs e) => clipPlanes.createClipPlanes();
+        
+
 
         private void ConceptToDetailed_Click(object sender, RoutedEventArgs e)
         {
-            ViewVisibilitySettings viewVisibilitySettings = new ViewVisibilitySettings();
-            View view = new View();
-            ModelViewEnumerator ViewEnum = ViewHandler.GetAllViews();
-            while (ViewEnum.MoveNext())
-            {
-                view = ViewEnum.Current;
-                viewVisibilitySettings.GridsVisible = false;
-                view.VisibilitySettings = viewVisibilitySettings;
-                view.Modify();
-            }
+
         }
 
         private void DetailedToConcept_Click(object sender, RoutedEventArgs e)
@@ -126,7 +121,15 @@ namespace KliczekPomocniczek
             macroBuilder.Callback("acmdChangeJointTypeToCallback", "DETAIL", "View_01 window_1");
         }
 
-        public void CommitChangesInView_Click(object sender, RoutedEventArgs e) => ViewDetails.Run(this);
+        public void CommitChangesInView_Click(object sender, RoutedEventArgs e) 
+        {
+            ViewDetails.Run(this);
+            if (ColorAndTransparency.SelectedItem != null)
+            {
+                string ColorAndTranspareaancy = ColorAndTransparency.SelectedItem.ToString();
+                ViewHandler.SetRepresentation(ColorAndTranspareaancy);
+            }
+        }
 
         public void CreateListOFFiles_Click(object sender, RoutedEventArgs e)
         {
@@ -178,18 +181,26 @@ namespace KliczekPomocniczek
         private void LoadSavedViewSettings_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             Model model = new Model();
+            
             string modelName = cutNameOfProject(model);
-            string SelectedSetting = LoadSavedViewSettings.SelectedItem.ToString();
-            Hashtable hashtablele = SettingsSave.ReadHashtable();
+            if(LoadSavedViewSettings.SelectedItem != null)
+            {
+                string SelectedSetting = LoadSavedViewSettings.SelectedItem.ToString();
+                Hashtable hashtablele = SettingsSave.ReadHashtable();
+                Points_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "PointsCheckBox")].ToString());
+                Lines_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "LinesCheckBox")].ToString());
+                Bolts_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "BoltsCheckBox")].ToString());
+                Welds_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "WeldsCheckBox")].ToString());
+                Cuts_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "CutsCheckBox")].ToString());
+                Grids_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "GridsCheckBox")].ToString());
+                References_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "ReferencesCheckBox")].ToString());
+                Components_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "ComponentsCheckBox")].ToString());
+            }
+        }
 
-            Points_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "PointsCheckBox")].ToString());
-            Lines_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "LinesCheckBox")].ToString());
-            Bolts_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "BoltsCheckBox")].ToString());
-            Welds_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "WeldsCheckBox")].ToString());
-            Cuts_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "CutsCheckBox")].ToString());
-            Grids_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "GridsCheckBox")].ToString());
-            References_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "ReferencesCheckBox")].ToString());
-            Components_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(SelectedSetting, modelName, "ComponentsCheckBox")].ToString());
+        private void ColorAndTransparency_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }

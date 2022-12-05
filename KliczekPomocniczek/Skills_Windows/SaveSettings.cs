@@ -24,7 +24,7 @@ namespace KliczekPomocniczek.Skills
     {
         public static string stringKey(string nameOfSetting, string model, string nameOfButton)
         {
-            string s = string.Format("{0}_{1}_{2}", nameOfSetting, model, nameOfButton);
+            string s = string.Format("{0}${1}${2}", nameOfSetting, model, nameOfButton);
             return s;
         }
 
@@ -34,7 +34,8 @@ namespace KliczekPomocniczek.Skills
             string modelName = MainWindow.cutNameOfProject(model);
             string settingsName = nameOfSetting(mainWindow);
             string key = stringKey(modelName, settingsName, "Points_CheckBox");
-            if (!hashtable.ContainsKey(key))
+            bool b = hashtable.ContainsKey(key);
+            if (hashtable.ContainsKey(key) != false)
             {
                 hashtable.Add(stringKey(modelName, settingsName, "PointsCheckBox"), mainWindow.Points_CheckBox.IsChecked.ToString());
                 hashtable.Add(stringKey(modelName, settingsName, "LinesCheckBox"), mainWindow.Lines_CheckBox.IsChecked.ToString());
@@ -93,9 +94,9 @@ namespace KliczekPomocniczek.Skills
             }
             for(int i = 0; i < savedKeys.Count; i++)
             {
-                string[] keys = savedKeys[i].Split('\u005F');
-                if(!savedKeysCurrentModel.Contains(keys[0]) && keys[1] == modelName)
-                    savedKeysCurrentModel.Add(keys[0]);
+                string[] keys = savedKeys[i].Split('$');
+                if(keys[0] == modelName && !savedKeysCurrentModel.Contains(keys[1]))
+                    savedKeysCurrentModel.Add(keys[1]);
 
             }
             savedKeysCurrentModel = savedKeysCurrentModel.OrderBy(q => q).ToList();
@@ -133,9 +134,9 @@ namespace KliczekPomocniczek.Skills
 
         public static string nameOfSetting(MainWindow mainWindow)
         {
-            if (mainWindow.SaveAsView.Text != null)
+            if (mainWindow.LoadSavedViewSettings.Text != null)
             {
-                return mainWindow.SaveAsView.Text;
+                return mainWindow.LoadSavedViewSettings.Text;
             }
             else
             {

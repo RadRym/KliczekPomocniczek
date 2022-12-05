@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Controls;
+using Tekla.Structures;
 using Tekla.Structures.Dialog;
 using Tekla.Structures.Drawing;
 using Tekla.Structures.Model;
 using Tekla.Structures.Model.UI;
 using TSM = Tekla.Structures.Model;
 using View = Tekla.Structures.Model.UI.View;
+using Tekla.Structures.Filtering;
+using Tekla.Structures.Filtering.Categories;
+using Tekla.Structures.Dialog.UIControls;
 
 namespace KliczekPomocniczek.Skills
 {
@@ -24,6 +28,11 @@ namespace KliczekPomocniczek.Skills
         public static void Run(MainWindow mainWindow)
         {
             ViewVisibilitySettings viewVisibilitySettings = new ViewVisibilitySettings();
+            string whatphase = mainWindow.Phases.Text;
+            int leng = whatphase.Split((char)32).Length;
+            string[] phases = new string[leng];
+            phases = whatphase.Split((char)32);
+            visiblePhase(phases);
             View view = new View();
             ModelViewEnumerator ViewEnum = ViewHandler.GetAllViews();
             while (ViewEnum.MoveNext())
@@ -62,16 +71,29 @@ namespace KliczekPomocniczek.Skills
             return ListNamesPermViews;
         }
 
-        public static void sssss()
+        public static void visiblePhase(string[] phases)
         {
-            //Model model = new Model();
-            //bool ViewEnum = ViewHandler.SetRepresentation("standard");
-            //ModelViewEnumerator PermView = ViewHandler.GetPermanentViews();
-            //while (ViewEnum.MoveNext())
-            //{
-            //    View View = ViewEnum.Current;
-            //    ViewHandler.GetPermanentViews();
-            //}
+            
+            Model model = new Model();
+            ModelViewEnumerator ViewEnum = ViewHandler.GetAllViews();
+            AssemblyFilterExpressions.Phase assemblyPhase = new AssemblyFilterExpressions.Phase();
+            StringConstantFilterExpression phase = new StringConstantFilterExpression(phases);
+            BinaryFilterExpression binaryFilterExpression1 = new BinaryFilterExpression(assemblyPhase, StringOperatorType.IS_EQUAL, phase);
+            BinaryFilterExpressionCollection ExpressionCollection = new BinaryFilterExpressionCollection();
+            ExpressionCollection.Add(new BinaryFilterExpressionItem(binaryFilterExpression1, BinaryFilterOperatorType.BOOLEAN_OR));
+            Filter Filter = new Filter(ExpressionCollection);
+            ModelInfo modelInfo = model.GetInfo();
+            string filterName = "PMJ_AR_custom";
+            string fullFilterName = modelInfo.ModelPath + "/attributes/" + filterName;
+            Filter.CreateFile(FilterExpressionFileType.OBJECT_GROUP_VIEW, fullFilterName);
+
+            while (ViewEnum.MoveNext())
+            {
+                View ViewSel = ViewEnum.Current;
+                string s = ViewSel.ViewFilter;
+                ViewSel.ViewFilter = filterName;
+                ViewSel.Modify();
+            }
         }
     }
 }
