@@ -17,6 +17,7 @@ using System.Xml.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Runtime.Serialization;
+using View = Tekla.Structures.Model.UI.View;
 
 namespace KliczekPomocniczek.Skills
 {
@@ -27,10 +28,42 @@ namespace KliczekPomocniczek.Skills
             string s = string.Format("{0}${1}${2}", nameOfSetting, model, nameOfButton);
             return s;
         }
+        public static void disassembeSetings(Model model, MainWindow mainWindow, Hashtable hashtable)
+        {
+            string modelName = MainWindow.cutNameOfProject(model);
+            string settingsName = nameOfSetting(mainWindow);
+            string key = stringKey(modelName, settingsName, "Points_CheckBox");
+            bool b = hashtable.ContainsKey(key);
+            if (!hashtable.ContainsKey(key))
+            {
+                hashtable.Remove(stringKey(modelName, settingsName, "PointsCheckBox"));
+                hashtable.Remove(stringKey(modelName, settingsName, "LinesCheckBox"));
+                hashtable.Remove(stringKey(modelName, settingsName, "BoltsCheckBox"));
+                hashtable.Remove(stringKey(modelName, settingsName, "WeldsCheckBox"));
+                hashtable.Remove(stringKey(modelName, settingsName, "CutsCheckBox"));
+                hashtable.Remove(stringKey(modelName, settingsName, "ComponentsCheckBox"));
+                hashtable.Remove(stringKey(modelName, settingsName, "GridsCheckBox"));
+                hashtable.Remove(stringKey(modelName, settingsName, "ReferencesCheckBox"));
+                hashtable.Remove(stringKey(modelName, settingsName, "ColorAndTransparency"));
+                hashtable.Remove(stringKey(modelName, settingsName, "Phases"));
+                hashtable.Remove(stringKey(modelName, settingsName, "ClipPlanes"));
+            }
+        }
 
         public static void assembeSetings(Model model, MainWindow mainWindow, Hashtable hashtable)
         {
-            
+            List<string> s = new List<string>();
+            ModelViewEnumerator ViewEnum = ViewHandler.GetVisibleViews();
+            ViewEnum.MoveNext();
+            View ActiveView = ViewEnum.Current;
+            ClipPlaneCollection clips = ActiveView.GetClipPlanes();
+            foreach (ClipPlane clipPlane in clips)
+            {
+                string x = string.Format("{0}${1}$", clipPlane.Location.ToString(), clipPlane.UpVector.ToString());
+                s.Add(x);
+            }
+            string stringClip = string.Join("$", s);
+
             string modelName = MainWindow.cutNameOfProject(model);
             string settingsName = nameOfSetting(mainWindow);
             string key = stringKey(modelName, settingsName, "Points_CheckBox");
@@ -45,6 +78,9 @@ namespace KliczekPomocniczek.Skills
                 hashtable.Add(stringKey(modelName, settingsName, "ComponentsCheckBox"), mainWindow.Components_CheckBox.IsChecked.ToString());
                 hashtable.Add(stringKey(modelName, settingsName, "GridsCheckBox"), mainWindow.Grids_CheckBox.IsChecked.ToString());
                 hashtable.Add(stringKey(modelName, settingsName, "ReferencesCheckBox"), mainWindow.References_CheckBox.IsChecked.ToString());
+                hashtable.Add(stringKey(modelName, settingsName, "ColorAndTransparency"), mainWindow.ColorAndTransparency.SelectedValue.ToString());
+                hashtable.Add(stringKey(modelName, settingsName, "Phases"), mainWindow.Phases.Text.ToString());
+                hashtable.Add(stringKey(modelName, settingsName, "ClipPlanes"), stringClip);
             }
             else
             {
@@ -56,6 +92,9 @@ namespace KliczekPomocniczek.Skills
                 hashtable[stringKey(modelName, settingsName, "ComponentsCheckBox")] = mainWindow.Components_CheckBox.IsChecked.ToString();
                 hashtable[stringKey(modelName, settingsName, "GridsCheckBox")] = mainWindow.Grids_CheckBox.IsChecked.ToString();
                 hashtable[stringKey(modelName, settingsName, "ReferencesCheckBox")] = mainWindow.References_CheckBox.IsChecked.ToString();
+                hashtable[stringKey(modelName, settingsName, "ColorAndTransparency")] = mainWindow.ColorAndTransparency.SelectedValue.ToString();
+                hashtable[stringKey(modelName, settingsName, "Phases")] = mainWindow.Phases.Text.ToString();
+                hashtable[stringKey(modelName, settingsName, "ClipPlanes")] = stringClip;
             }
         }
 

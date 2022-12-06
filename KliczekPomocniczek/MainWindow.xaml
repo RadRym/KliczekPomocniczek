@@ -170,7 +170,7 @@
                             Grid.Column="2"
                             x:Name="DeleteDisplaySettings"
                             Content="-"
-                            Margin="0,0,0,0"/>
+                            Margin="0,0,0,0" Click="DeleteDisplaySettings_Click"/>
                         </Grid>
 
                         <Button

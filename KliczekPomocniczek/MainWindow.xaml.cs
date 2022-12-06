@@ -13,7 +13,10 @@ using Tekla.Structures.Dialog.UIControls;
 using Tekla.Structures.Model;
 using Tekla.Structures.Model.UI;
 using View = Tekla.Structures.Model.UI.View;
-
+using TSM = Tekla.Structures.Model;
+using TSMUI = Tekla.Structures.Model.UI;
+using System.Linq;
+using Tekla.Structures.Datatype;
 
 namespace KliczekPomocniczek
 {
@@ -113,6 +116,7 @@ namespace KliczekPomocniczek
         private void ConceptToDetailed_Click(object sender, RoutedEventArgs e)
         {
 
+
         }
 
         private void DetailedToConcept_Click(object sender, RoutedEventArgs e)
@@ -123,12 +127,11 @@ namespace KliczekPomocniczek
 
         public void CommitChangesInView_Click(object sender, RoutedEventArgs e) 
         {
-            ViewDetails.Run(this);
-            if (ColorAndTransparency.SelectedItem != null)
-            {
-                string ColorAndTranspareaancy = ColorAndTransparency.SelectedItem.ToString();
-                ViewHandler.SetRepresentation(ColorAndTranspareaancy);
-            }
+            string SelectedSetting = LoadSavedViewSettings.SelectedItem.ToString();
+            Model model = new Model();
+            string modelName = cutNameOfProject(model);
+            ViewDetails.Run(this, modelName, SelectedSetting);
+
         }
 
         public void CreateListOFFiles_Click(object sender, RoutedEventArgs e)
@@ -195,12 +198,23 @@ namespace KliczekPomocniczek
                 Grids_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "GridsCheckBox")].ToString());
                 References_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "ReferencesCheckBox")].ToString());
                 Components_CheckBox.IsChecked = bool.Parse(hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "ComponentsCheckBox")].ToString());
+                ColorAndTransparency.SelectedItem = hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "ColorAndTransparency")];
+                Phases.Text = hashtablele[SettingsSave.stringKey(modelName, SelectedSetting, "Phases")].ToString();
             }
         }
 
         private void ColorAndTransparency_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             
+        }
+
+        private void DeleteDisplaySettings_Click(object sender, RoutedEventArgs e)
+        {
+            Model model = new Model();
+            Hashtable hashtable = SettingsSave.ReadHashtable();
+            SettingsSave.disassembeSetings(model, this, hashtable);
+            SettingsSave.Save(hashtable);
+            SettingsSave.Load(this, model, hashtable);
         }
     }
 }

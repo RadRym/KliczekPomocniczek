@@ -14,6 +14,7 @@ using View = Tekla.Structures.Model.UI.View;
 using Tekla.Structures.Filtering;
 using Tekla.Structures.Filtering.Categories;
 using Tekla.Structures.Dialog.UIControls;
+using System.Linq;
 
 namespace KliczekPomocniczek.Skills
 {
@@ -25,7 +26,7 @@ namespace KliczekPomocniczek.Skills
                 return true;
             else return false;
         }
-        public static void Run(MainWindow mainWindow)
+        public static void Run(MainWindow mainWindow, string modelName, string SelectedSetting)
         {
             ViewVisibilitySettings viewVisibilitySettings = new ViewVisibilitySettings();
             string whatphase = mainWindow.Phases.Text;
@@ -53,8 +54,37 @@ namespace KliczekPomocniczek.Skills
                 viewVisibilitySettings.ReferenceObjectsVisible = CheckBox_Bool(mainWindow.References_CheckBox);
                 viewVisibilitySettings.ComponentsVisible = CheckBox_Bool(mainWindow.Components_CheckBox);
                 viewVisibilitySettings.ComponentsVisibleInComponents = CheckBox_Bool(mainWindow.Components_CheckBox);
-                #endregion 
+                #endregion
 
+                clipPlanes.deleteClipPlanes();
+                Hashtable hashtable = SettingsSave.ReadHashtable();
+                string ClitPlanes = hashtable[SettingsSave.stringKey(modelName, SelectedSetting, "ClipPlanes")].ToString();
+                List<string> strings = ClitPlanes.Split('$').ToList();
+                strings.RemoveAll(s => string.IsNullOrWhiteSpace(s));
+                if (strings.Count > 0)
+                {
+                    for (int i = 0; i < strings.Count - 1; i = i + 2)
+                    {
+                        ClipPlane CPlane = new ClipPlane();
+                        CPlane.View = view;
+                        var locatro = strings[i].Replace("(", string.Empty).Replace(")", string.Empty).Split(',');
+                        int loco1 = (int)double.Parse(locatro[0]);
+                        int loco2 = (int)double.Parse(locatro[1]);
+                        int loco3 = (int)double.Parse(locatro[2]);
+                        var vectro = strings[i + 1].Replace("(", string.Empty).Replace(")", string.Empty).Split(',');
+                        int veco1 = (int)double.Parse(vectro[0]);
+                        int veco2 = (int)double.Parse(vectro[1]);
+                        int veco3 = (int)double.Parse(vectro[2]);
+                        CPlane.Location = new Tekla.Structures.Geometry3d.Point(loco1, loco2, loco3);
+                        CPlane.UpVector = new Tekla.Structures.Geometry3d.Vector(veco1, veco2, veco3);
+                        CPlane.Insert();
+                    }
+                }
+                if (mainWindow.ColorAndTransparency.SelectedItem != null)
+                {
+                    string ColorAndTranspareaancy = mainWindow.ColorAndTransparency.SelectedItem.ToString();
+                    ViewHandler.SetRepresentation(ColorAndTranspareaancy);
+                }
                 view.VisibilitySettings = viewVisibilitySettings;
                 view.Modify();
             }
